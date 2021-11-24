@@ -18,47 +18,53 @@ if (localStorage.token) {
 
 function App() {
   const currentState = useSelector(state => state)
-    console.log(currentState)
     
-    useEffect(()=> {
-        if (localStorage.token) {
-            setAuthToken(localStorage.token)
-        }
-    }, [currentState])
+  useEffect(()=> {
+      if (localStorage.token) {
+          setAuthToken(localStorage.token)
+      }
+  }, [currentState])
 
-    const checkUser = async () => {
-        try {
-            const response = await API.get('/check-auth')
+  const checkUser = async () => {
+      try {
+          const response = await API.get('/check-auth')
 
-            if (response.status === 404) {
-                return store.dispatch({
-                    type: "AUTH_ERROR",
-                });
-            }
-            
-            let payload = response.data.data.user
-            
-            payload.token = localStorage.token;
-
-            store.dispatch({
-                type: "USER_SUCCESS",
-                payload,
+          if (response.status === 404) {
+              return store.dispatch({
+                  type: "AUTH_ERROR",
               });
-        } catch (error) {
-            console.log(error)
-        }
-    }
+          }
+          
+          let payload = response.data.data.user
+          
+          payload.token = localStorage.token;
 
-    useEffect(()=> {
-        checkUser()
-    }, [])
+          store.dispatch({
+              type: "USER_SUCCESS",
+              payload,
+            });
+      } catch (error) {
+          console.log(error)
+      }
+  }
+
+  useEffect(()=> {
+      checkUser()
+  }, [])
   
   return (
     <Router>
-      <Header />
+      {currentState.isLogin ? <Header /> : null}
       <Routes>
-        <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/home" element={<Home />} />
+        <Route exact path="/" element={currentState.isLogin ? <Home /> : <LandingPage />} />
+
+        { currentState.isLogin ?
+          <>
+            <Route path="/detail-tour" element={currentState.isLogin ? <Home /> : <LandingPage />} />
+          </>
+          : 
+          <Redirect to="/" />
+        }
       </Routes>
     </Router>
   );

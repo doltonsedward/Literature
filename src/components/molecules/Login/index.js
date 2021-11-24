@@ -24,6 +24,7 @@ const Login = ({ isOpen, setIsOpen }) => {
     const [open, setOpen] = React.useState(false)
     const [message, setMessage] = React.useState('Not found')
     const [severity, setSeverity] = React.useState('success')
+
     const [form, setForm] = React.useState({
         email: "",
         password: ""
@@ -40,8 +41,6 @@ const Login = ({ isOpen, setIsOpen }) => {
         })
     }
 
-    console.log(form)
-
     const loginSession = async () => {
         setOpen(true)
         try {
@@ -56,10 +55,10 @@ const Login = ({ isOpen, setIsOpen }) => {
             const response = await API.post('/login', body, config)
 
             if (response?.status === 200) {
-                // store.dispatch({ 
-                //     type: 'LOGIN', 
-                //     payload: response.data.data
-                // })    
+                store.dispatch({ 
+                    type: 'LOGIN', 
+                    payload: response.data.user
+                })    
 
                 setMessage('Login Success')
                 setSeverity('success')
@@ -125,9 +124,9 @@ const Login = ({ isOpen, setIsOpen }) => {
                         <Box sx={{ padding: '41px 33px 37px', borderRadius: '5px' }}>
                             <Typography variant="h2" component="div">Sign in</Typography>
                             <Gap height={29} />
-                            <Input placeholder="Email" value={form.email} onChange={handleChange} />
+                            <Input name="email" value={form.email} onChange={handleChange} placeholder="Email" />
                             <Gap height={20} />
-                            <Input type="password" placeholder="Password" value={form.password} onChange={handleChange} />
+                            <Input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Password" />
                             <Gap height={36} />
                             <Button variant="contained" sx={submitBtn} onClick={loginSession}>sign in</Button>
                         </Box>
