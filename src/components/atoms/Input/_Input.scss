@@ -1,0 +1,17 @@
+.wrapper-input.default {
+    
+    .input-theme {
+        padding: 10px 14px;
+        height: 50;
+        width: 100%;
+        color: var(--input-color);
+        background-color: var(--input-bg);
+        border: none;
+        border: 2px solid #BCBCBC;
+        border-radius: var(--border-trendy);
+    
+        &::placeholder {
+            color: white;
+        }
+    }
+}

@@ -14,6 +14,11 @@ theme.typography.h1 = {
   fontFamily: "Avenir"
 }
 
+theme.typography.h2 = {
+  ...theme.typography.h2,
+  fontFamily: "Avenir"
+}
+
 theme.typography.subtitle1 = {
   ...theme.typography.subtitle1,
   fontFamily: "Avenir"

@@ -1,6 +1,7 @@
 :root {
     --white: #ffffff;
     --low-white: #d1d1d1;
+    --second-white: #BCBCBC;
     --soft-black: #161616;
     --dark-red: #AF2E1C;
     --low-red: #be4c3d;
@@ -17,7 +18,8 @@
 
     
     /* input section */
-    --input-bg: #D2D2D240;
+    --input-color: var(--second-white);
+    --input-bg: rgb(87, 87, 87);
 
     --input-border-color: #BCBCBC;
     --input-border: 2px solid var(--input-border-color);
@@ -28,4 +30,10 @@
     --btn-primary-effect: var(--secondary-effect);
     --btn-secondary: var(--third);
     --btn-secondary-effect: var(--third-effect);
+
+
+
+
+    /* border section */
+    --border-trendy: 5px
 }
