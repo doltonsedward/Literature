@@ -1,12 +1,17 @@
 :root {
     --white: #ffffff;
+    --low-white: #d1d1d1;
     --soft-black: #161616;
     --dark-red: #AF2E1C;
+    --low-red: #be4c3d;
 
 
     /* theme section */
     --primary: var(--soft-black);
     --secondary: var(--dark-red);
+    --secondary-effect: var(--low-red);
+    --third: var(--white);
+    --third-effect: var(--low-white);
 
     --text-color-primary: var(--white);
 
@@ -20,4 +25,7 @@
 
     /* button section */
     --btn-primary: var(--secondary);
+    --btn-primary-effect: var(--secondary-effect);
+    --btn-secondary: var(--third);
+    --btn-secondary-effect: var(--third-effect);
 }
