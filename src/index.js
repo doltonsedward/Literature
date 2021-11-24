@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './assets/css/root.css'
 import App from './pages/App';
+import store from './store'
+import { Provider } from "react-redux";
 
 // import MUI component
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -26,9 +28,11 @@ theme.typography.subtitle1 = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

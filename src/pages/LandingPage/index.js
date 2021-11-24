@@ -8,9 +8,11 @@ import { muiRedButton, muiWhiteButton } from '../../utils'
 import { Gap } from '../../components'
 import { useState } from 'react'
 import Login from '../../components/molecules/Login'
+import Register from '../../components/molecules/Register'
 
 const LandingPage = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isLoginOpen, setIsLoginOpen] = useState(false)
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false)
     
     const signUpButton = {
         ...muiRedButton,
@@ -36,15 +38,16 @@ const LandingPage = () => {
                         <Gap height={44} />
                         <Typography variant="subtitle1" component="div" sx={{ width: 408, height: 107 }}>Sign-up and receive unlimited accesss to all of your literatur - share your literature.</Typography>
                         <div className="wrapper-button">
-                            <Button variant="contained" sx={signUpButton}>Sign up</Button>
-                            <Button variant="contained" sx={signInButton} onClick={()=> setIsModalOpen(true)}>Sign in</Button>
+                            <Button variant="contained" sx={signUpButton} onClick={()=> setIsRegisterOpen(true)}>Sign up</Button>
+                            <Button variant="contained" sx={signInButton} onClick={()=> setIsLoginOpen(true)}>Sign in</Button>
                         </div>
                     </div>
                     <div className="section-two">
                         <img src={coverImg} alt="When you want to buy a book" />
                     </div>
             </div>
-            <Login isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+            <Login isOpen={isLoginOpen} setIsOpen={setIsLoginOpen} />
+            <Register isOpen={isRegisterOpen} setIsOpen={setIsRegisterOpen} />
         </div>
     )
 }

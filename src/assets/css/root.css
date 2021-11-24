@@ -18,7 +18,7 @@
 
     
     /* input section */
-    --input-color: var(--second-white);
+    --input-color: var(--white);
     --input-bg: rgb(87, 87, 87);
 
     --input-border-color: #BCBCBC;

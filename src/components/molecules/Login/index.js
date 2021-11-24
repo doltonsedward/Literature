@@ -1,17 +1,94 @@
 import './_Login.scss'
-
-import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import TextField from '@mui/material/TextField';
-import { Button, Typography } from '@mui/material';
 import { Gap, Input } from '../..';
+import { muiWhiteButton } from '../../../utils';
+import store from '../../../store';
+
+// MUI component
+import * as React from 'react';
+import { 
+    Typography,
+    Modal,
+    Backdrop,
+    Box,
+    Fade,
+    Button,
+    Snackbar,
+    IconButton,
+    Alert
+} from '@mui/material';
+
+// import API
+import { API } from '../../../config/API'
 
 const Login = ({ isOpen, setIsOpen }) => {
+    const [open, setOpen] = React.useState(false)
+    const [message, setMessage] = React.useState('Not found')
+    const [severity, setSeverity] = React.useState('success')
+    const [form, setForm] = React.useState({
+        email: "",
+        password: ""
+    })
+
+    const handleCloseLogin = () => setOpen(false)
+    
     const handleClose = () => setIsOpen(false)
 
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    console.log(form)
+
+    const loginSession = async () => {
+        setOpen(true)
+        try {
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                }
+            }
+
+            const body = JSON.stringify(form)
+
+            const response = await API.post('/login', body, config)
+
+            if (response?.status === 200) {
+                // store.dispatch({ 
+                //     type: 'LOGIN', 
+                //     payload: response.data.data
+                // })    
+
+                setMessage('Login Success')
+                setSeverity('success')
+            }
+            
+        } catch (error) {
+            console.log(error)
+            setMessage('Email or password are incorrect')
+            setSeverity('error')
+        }
+    }
+
+    
+    // mui logic
+    const action = (
+        <>
+            <Button color="secondary" size="small" onClick={handleClose}>
+                CLOSE
+            </Button>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+            </IconButton>
+        </>
+    )
+    
     const style = {
         position: 'absolute',
         top: '50%',
@@ -22,7 +99,13 @@ const Login = ({ isOpen, setIsOpen }) => {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-    };
+    }
+
+    const submitBtn = {
+        ...muiWhiteButton,
+        width: '100%', 
+        height: 50
+    }
 
     return (
         <div>
@@ -42,15 +125,31 @@ const Login = ({ isOpen, setIsOpen }) => {
                         <Box sx={{ padding: '41px 33px 37px', borderRadius: '5px' }}>
                             <Typography variant="h2" component="div">Sign in</Typography>
                             <Gap height={29} />
-                            <Input placeholder="Email" />
+                            <Input placeholder="Email" value={form.email} onChange={handleChange} />
                             <Gap height={20} />
-                            <Input type="password" placeholder="Password" />
+                            <Input type="password" placeholder="Password" value={form.password} onChange={handleChange} />
                             <Gap height={36} />
-                            <Button variant="contained" sx={{ width: '100%', height: 50 }}>sign in</Button>
+                            <Button variant="contained" sx={submitBtn} onClick={loginSession}>sign in</Button>
                         </Box>
                     </Box>
                 </Fade>
+
             </Modal>
+            <Snackbar sx={{
+                position: 'fixed',
+                bottom: 0,
+                zIndex: 99999999999,
+                transform: 'translate(50px, -25px) scale(1.2)'
+            }}
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleCloseLogin}
+                action={action}
+            >
+                <Alert onClose={handleCloseLogin} severity={severity} sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+            </Snackbar>
         </div>
     )
 }
