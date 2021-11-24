@@ -1,0 +1,23 @@
+:root {
+    --white: #ffffff;
+    --soft-black: #161616;
+    --dark-red: #AF2E1C;
+
+
+    /* theme section */
+    --primary: var(--soft-black);
+    --secondary: var(--dark-red);
+
+    --text-color-primary: var(--white);
+
+    
+    /* input section */
+    --input-bg: #D2D2D240;
+
+    --input-border-color: #BCBCBC;
+    --input-border: 2px solid var(--input-border-color);
+
+
+    /* button section */
+    --btn-primary: var(--secondary);
+}
