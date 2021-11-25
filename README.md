@@ -1,10 +1,18 @@
-## THings to do
-- logic for regis
+## Things to do
+- Gender in input, change to option
 - Loading for alert when fetching data
-- Dynamic input search for searching any, like title, year etc
+- Customize select/option like mockup
+- Add expire token again, and manipulate in client if possible
+- Push notification when error
+- My literature in profile
 
 ## Done Slicing UI 
 - Landing Page
 - Login
 - Register
 - Home
+- Search-result
+- Profile
+
+## Done Logic
+- Dynamic navbar in header

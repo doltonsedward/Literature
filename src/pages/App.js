@@ -2,15 +2,12 @@ import './App.css'
 import store from '../store'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-
-// import my component
-import { Header } from '../components'
-import LandingPage from './LandingPage'
-import Home from './Home'
 
 // import API
 import { API, setAuthToken } from '../config'
+
+// import pages
+import Routes from '../config/Route/Routes'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -52,16 +49,7 @@ function App() {
       checkUser()
   }, [])
   
-  return (
-    <Router>
-      {currentState.isLogin ? <Header /> : null}
-      <Switch>
-        <Route exact path="/">
-          {currentState.isLogin ? <Home /> : <LandingPage />}
-        </Route>
-      </Switch>
-    </Router>
-  );
+  return <Routes />
 }
 
 export default App;

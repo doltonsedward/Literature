@@ -1,0 +1,51 @@
+.box-profile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 34px 26px;
+    margin-top: 15px;
+    background-color: var(--primary-alternate);
+    border-radius: 8px;
+
+    .list-sosmed {
+        order: 1;
+        & li {
+            display: flex;
+            margin-bottom: 35px;
+            
+            img { 
+                margin-right: 15px; 
+                width: 30px;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            order: 2
+        }
+    }
+
+    .profile-pic {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        order: 2;
+        overflow-x: hidden;
+
+        .button-input-file {
+            .input-file__profile {
+                width: inherit;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                cursor: pointer;
+                opacity: 0;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            order: 1;
+        }
+    }
+}

@@ -14,7 +14,7 @@ const Home = () => {
     const history = useHistory()
     const [dataLiterature, setDataLiterature] = useState([])
     const [inputData, setInputData] = useState({
-        name: ""
+        title: ""
     })
 
     const getLiterature = async () => {
@@ -37,6 +37,11 @@ const Home = () => {
     useEffect(()=> {
         getLiterature()
     }, [])
+
+    const handleSubmit = () => {
+        localStorage.setItem("search", JSON.stringify(inputData))
+        history.push('/search-result')
+    }
     
     return (
         <div className="homepage">
@@ -44,14 +49,14 @@ const Home = () => {
             <Gap height={40} />
             <div className="wrapper-search-list">
                 <div className="wrapper-input-autocomplete">
-                    <Input style={{ width: 600, height: 50 }} placeholder="Search for literature" list="literature" onChange={handleChange} />
+                    <Input style={{ width: 600, height: 50 }} name="title" value={inputData.title} list="literature" onChange={handleChange} placeholder="Search for literature" />
                     <datalist id="literature" style={{ height: 200, overflowX: 'hidden' }}>
                         {dataLiterature.map((item, i) => {
                             return <option key={i} value={item.title} />
                         })}
                     </datalist>
                 </div>
-                <Button onClick={()=> history.push('/search-result')}><img src={iconSearch} alt="button for searching list book" /></Button>
+                <Button onClick={handleSubmit}><img src={iconSearch} alt="button for searching list book" /></Button>
             </div>
         </div>
     )

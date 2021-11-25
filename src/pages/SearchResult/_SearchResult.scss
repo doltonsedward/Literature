@@ -1,0 +1,60 @@
+.search-result {
+    .wrapper-search-list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .content-search-list {
+        display: flex;
+        
+        .year-option {
+            margin-right: 72px;
+            
+            select {
+                width: 160px;
+                color: var(--select-color);
+                background-color: var(--select-bg);
+                border-radius: var(--border-trendy);
+                padding: 5px 18px;
+                
+                option {
+                    padding: 5px 18px;
+                    color: var(--select-color);
+                }
+            }
+        }
+        
+        .literatures {
+
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                
+                li {
+                    position: relative;
+                    width: 200px;
+                    margin-right: 80px;
+                    cursor: pointer;
+
+                    .title-literature {
+                        font-family: 'Times New Roman', Times, serif;
+                        font-size: 20px;
+                        height: 50px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    embed {
+                        border-radius: var(--border-trendy);
+                    }
+
+                    .footer {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -13,12 +13,12 @@ const theme = createTheme()
 
 theme.typography.h1 = {
   ...theme.typography.h1,
-  fontFamily: "Avenir"
+  fontFamily: "Times New Roman"
 }
 
 theme.typography.h2 = {
   ...theme.typography.h2,
-  fontFamily: "Avenir"
+  fontFamily: "Times New Roman"
 }
 
 theme.typography.subtitle1 = {

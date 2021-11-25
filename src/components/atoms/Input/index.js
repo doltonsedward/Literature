@@ -24,6 +24,15 @@ const InputBasic = ({...rest}) => {
     )
 }
 
+const InputField = ({...rest}) => {
+    return (
+        <label className="wrapper-input default">
+            <textarea {...rest} />
+        </label>
+    )
+}
+
+
 const Input = ({label, variant, onClick, ...rest}) => {
     let classForLabel = 'input-section'
 
@@ -35,6 +44,13 @@ const Input = ({label, variant, onClick, ...rest}) => {
 
         case 'basic':
             return <InputBasic {...rest} />
+
+        case 'field':
+            return (
+                <label className="wrapper-input default">
+                    <InputField className="input-theme" {...rest} />
+                </label>
+            )
 
         default:
             return (
