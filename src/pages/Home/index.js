@@ -10,7 +10,6 @@ import { API } from '../../config'
 // MUI component
 import { Button } from '@mui/material'
 
-
 const Home = () => {
     const history = useHistory()
     const [dataLiterature, setDataLiterature] = useState([])

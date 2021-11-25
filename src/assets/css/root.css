@@ -4,11 +4,14 @@
     --second-white: #BCBCBC;
     --soft-black: #161616;
     --dark-red: #AF2E1C;
+    --darkness-red: #6e2f27;
     --low-red: #be4c3d;
+    --gray-smooth: #252525;
 
 
     /* theme section */
     --primary: var(--soft-black);
+    --primary-alternate: var(--gray-smooth);
     --secondary: var(--dark-red);
     --secondary-effect: var(--low-red);
     --third: var(--white);
@@ -39,10 +42,14 @@
     --btn-primary-effect: var(--secondary-effect);
     --btn-secondary: var(--third);
     --btn-secondary-effect: var(--third-effect);
+    --btn-block: var(--darkness-red);
 
 
     --subtitle: var(--second-white);
 
     /* border section */
-    --border-trendy: 5px
+    --border-trendy: 5px;
+
+    /* padding section */
+    --literature-default-padding: 20px 70px
 }

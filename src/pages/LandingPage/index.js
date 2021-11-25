@@ -7,8 +7,7 @@ import { Button } from '@mui/material'
 import { muiRedButton, muiWhiteButton } from '../../utils'
 import { Gap } from '../../components'
 import { useState } from 'react'
-import Login from '../../components/molecules/Login'
-import Register from '../../components/molecules/Register'
+import { Login, Register } from '../../components'
 
 const LandingPage = () => {
     const [isLoginOpen, setIsLoginOpen] = useState(false)
