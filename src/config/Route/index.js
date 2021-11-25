@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux"
 import { Redirect, Route } from "react-router"
 
-const UserLoginRoute = ({ component: Component, ...rest }) => {
+const UserLoginRoute = ({ ...rest }) => {
     const userLogin = useSelector(state => state.isLogin)
     return (
         <>
             {/* need watched */}
-            <Route {...rest} render={(props) => (userLogin ? <Component {...props} /> : <Redirect to="/" />)} />
+            {userLogin ? <Route {...rest} /> : <Redirect to="/" />}
             {/* props have history, location, match, staticContext */}
         </>
     )
