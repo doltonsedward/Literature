@@ -20,3 +20,7 @@ code {
 }
 
 li:not(.native) { list-style: none; }
+
+.literature-default-padding {
+  padding: 20px;    
+}

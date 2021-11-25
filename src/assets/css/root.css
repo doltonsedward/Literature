@@ -25,6 +25,15 @@
     --input-border: 2px solid var(--input-border-color);
 
 
+    /* select section */
+    --select-color: var(--white);
+    --select-bg: rgb(87, 87, 87);
+
+
+    /* border */
+    --border-trendy: 5px;
+
+
     /* button section */
     --btn-primary: var(--secondary);
     --btn-primary-effect: var(--secondary-effect);
@@ -32,7 +41,7 @@
     --btn-secondary-effect: var(--third-effect);
 
 
-
+    --subtitle: var(--second-white);
 
     /* border section */
     --border-trendy: 5px
