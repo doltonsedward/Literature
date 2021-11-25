@@ -1,0 +1,15 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .wrapper-search-list {
+        display: flex;
+        align-items: center;
+
+        // .wrapper-auto-complete {
+        //     background-color: white;
+        // }
+    }
+}

@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @font-face { font-family: 'Avenir'; src: url('./assets/font/Avenir-Black.otf') }
 @font-face { font-family: 'Avenir Light'; src: url('./assets/font/Avenir-Book.otf') }
 @font-face { font-family: 'Avenir Roman'; src: url('./assets/font/Avenir-Roman.otf') }
@@ -5,10 +11,12 @@
 body {
   color: var(--text-color-primary);
   background-color: var(--primary);
-  font-family: 'Avenir Roman', 'Times New Roman', Times, serif;
+  font-family: 'Avenir', 'Times New Roman', Times, serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+li:not(.native) { list-style: none; }

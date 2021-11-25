@@ -1,0 +1,5 @@
+:focus {
+    outline: none;
+}
+
+input { font-size: 16px }
