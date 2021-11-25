@@ -2,7 +2,7 @@ import './App.css'
 import store from '../store'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // import my component
 import { Header } from '../components'
@@ -55,17 +55,11 @@ function App() {
   return (
     <Router>
       {currentState.isLogin ? <Header /> : null}
-      <Routes>
-        <Route exact path="/" element={currentState.isLogin ? <Home /> : <LandingPage />} />
-
-        { currentState.isLogin ?
-          <>
-            <Route path="/detail-tour" element={currentState.isLogin ? <Home /> : <LandingPage />} />
-          </>
-          : 
-          <Redirect to="/" />
-        }
-      </Routes>
+      <Switch>
+        <Route exact path="/">
+          {currentState.isLogin ? <Home /> : <LandingPage />}
+        </Route>
+      </Switch>
     </Router>
   );
 }
