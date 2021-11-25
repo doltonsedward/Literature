@@ -10,7 +10,8 @@ import LandingPage from './LandingPage'
 import Home from './Home'
 
 // import API
-import { API, setAuthToken } from '../config'
+import { API, setAuthToken, UserLoginRoute } from '../config'
+import SearchResult from './SearchResult'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -56,9 +57,19 @@ function App() {
     <Router>
       {currentState.isLogin ? <Header /> : null}
       <Switch>
+        {currentState.isLogin && (
+          <>
+            <Route exact path="/">
+                <Home /> 
+            </Route>
+            <UserLoginRoute path="/search-result" component={SearchResult} />
+          </>
+        )}
+        
         <Route exact path="/">
-          {currentState.isLogin ? <Home /> : <LandingPage />}
+          <LandingPage />
         </Route>
+
       </Switch>
     </Router>
   );
