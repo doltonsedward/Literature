@@ -1,9 +1,8 @@
 import './_SearchResult.scss'
 
-import { iconSearch, logo } from "../../assets"
+import { iconSearch } from "../../assets"
 import { Gap, Input } from '../../components'
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router'
 
 // import API
 import { API } from '../../config'
