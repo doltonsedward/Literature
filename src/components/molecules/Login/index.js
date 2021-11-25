@@ -22,7 +22,7 @@ import { API } from '../../../config/API'
 
 const Login = ({ isOpen, setIsOpen }) => {
     const [open, setOpen] = React.useState(false)
-    const [message, setMessage] = React.useState('Not found')
+    const [message, setMessage] = React.useState('Loading..')
     const [severity, setSeverity] = React.useState('success')
 
     const [form, setForm] = React.useState({
