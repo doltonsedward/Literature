@@ -9,6 +9,7 @@ import store from '../../../store'
 
 const Header = () => {
     const history = useHistory()
+    const currentPath = history.location.pathname
 
     const currentState = useSelector(state => state)
     const linkStyle = {
@@ -34,9 +35,9 @@ const Header = () => {
         <header className="header">
             <nav>
                 <ul >
-                    <li><Link style={linkStyle} to="/profile">Profile</Link></li>
-                    <li><Link style={linkStyle} to="/profile">My Collection</Link></li>
-                    <li><Link style={linkStyle} to="/profile">Add Literature</Link></li>
+                    <li className={currentPath === '/profile' ? 'active' : ''}><Link style={linkStyle} to="/profile">Profile</Link></li>
+                    <li className={currentPath === '/collection' ? 'active' : ''}><Link style={linkStyle} to="/collection">My Collection</Link></li>
+                    <li className={currentPath === '/add-literature' ? 'active' : ''}><Link style={linkStyle} to="/add-literature">Add Literature</Link></li>
                     <li onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</li>
                 </ul>
             </nav>
