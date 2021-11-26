@@ -1,14 +1,18 @@
+import { Gap } from '..';
+import { iconFile } from '../../../assets';
 import './_Input.scss';
 
 const InputFile = ({label, className, onClick, ...rest}) => {
     return (
         <>
-            <label className="wrapper-input">
+            <label className="wrapper-input-file">
                 <p style={{fontWeight: 800}}>{label}</p>
                 <div className={className}>
                     <button className="input-theme">
                         Attach here
-                        <input type="file" {...rest} onClick={onclick} />
+                        <Gap width={45} />
+                        <img width="20px" src={iconFile} alt="drop your file here" />
+                        <input type="file" className="input-theme" {...rest} onClick={onclick} />
                     </button>
                 </div>
             </label>
@@ -32,15 +36,13 @@ const InputField = ({...rest}) => {
     )
 }
 
-
 const Input = ({label, variant, onClick, ...rest}) => {
     let classForLabel = 'input-section'
 
     switch (variant) {
 
         case 'file':
-            classForLabel += ' root--input-file'
-            return <InputFile label={label} className={classForLabel} onClick={onClick} {...rest} />
+            return <InputFile label={label} onClick={onClick} {...rest} />
 
         case 'basic':
             return <InputBasic {...rest} />

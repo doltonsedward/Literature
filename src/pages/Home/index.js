@@ -1,16 +1,21 @@
 import './_Home.scss'
+import React from 'react';
 import { iconSearch, logo } from "../../assets"
 import { Input, Gap } from '../../components'
+
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
+import { pushNotif } from '../../utils';
 
 // import API
-import { API } from '../../config'
+import { API, checkUser, setAuthToken } from '../../config'
 
 // MUI component
 import { Button } from '@mui/material'
 
 const Home = () => {
+    const currentState = useSelector(state => state)
     const history = useHistory()
     const [dataLiterature, setDataLiterature] = useState([])
     const [inputData, setInputData] = useState({
@@ -23,7 +28,12 @@ const Home = () => {
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
-            console.log(error)
+            const status = error.response.data.status
+            const message = error.response.data.message
+            pushNotif({
+                title: status,
+                message
+            })
         }
     }
 
@@ -33,9 +43,17 @@ const Home = () => {
             [e.target.name]: e.target.value
         })
     }
+
+    // for fetching setauth again
+    useEffect(()=> {
+        if (localStorage.token) {
+            setAuthToken(localStorage.token)
+        }
+    }, [currentState])
     
     useEffect(()=> {
         getLiterature()
+        checkUser()
     }, [])
 
     const handleSubmit = () => {
@@ -44,7 +62,7 @@ const Home = () => {
     }
     
     return (
-        <div className="homepage">
+        <div className="homepage literature-default-padding">
             <img src={logo} width={489} alt="for searching your book" />
             <Gap height={40} />
             <div className="wrapper-search-list">

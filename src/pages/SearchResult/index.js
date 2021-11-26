@@ -3,6 +3,8 @@ import './_SearchResult.scss'
 import { iconSearch } from "../../assets"
 import { Gap, Input } from '../../components'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { pushNotif } from '../../utils'
 
 // import API
 import { API } from '../../config'
@@ -24,7 +26,12 @@ const SearchResult = () => {
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
-            console.log(error)
+            const status = error.response?.data.status
+            const message = error.response?.data.message
+            pushNotif({
+                title: status,
+                message
+            })
         }
     }
 
@@ -34,9 +41,6 @@ const SearchResult = () => {
             [e.target.name]: e.target.value
         })
     }
-
-
-    console.log(inputData)
 
     useEffect(()=> {
         getLiterature()
@@ -48,11 +52,9 @@ const SearchResult = () => {
     }
 
     const [loading, setLoading] = useState(true)
-    const [displayEmbed, setDisplayEmbed] = useState('none')
 
     setTimeout(()=> {
         setLoading(false)
-        setDisplayEmbed('block')
     }, 2000)
 
     return (
@@ -91,23 +93,25 @@ const SearchResult = () => {
                         {dataLiterature.map((item, i) => {
                             return (
                                 <li key={i}>
-                                    {loading && 
-                                        <Skeleton 
-                                            style={{ backgroundColor: 'var(--third)', borderRadius: 'var(--border-trendy)', position: 'absolute' }} 
-                                            variant="rectangular" 
-                                            width={200} 
-                                            height={270}
-                                        />
-                                    }
+                                    <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
+                                        {loading && 
+                                            <Skeleton 
+                                                style={{ backgroundColor: 'var(--third)', borderRadius: 'var(--border-trendy)', position: 'absolute' }} 
+                                                variant="rectangular" 
+                                                width={200} 
+                                                height={270}
+                                            />
+                                        }
 
-                                    <embed src={item.attache} width={200} height={270} />
-                                    <Gap height={18} />
-                                    <p className="title-literature">{item.title}</p>
-                                    <Gap height={15} />
-                                    <div className="footer">
-                                        <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.author}</Typography>
-                                        <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.publication_date.split('-')[2]}</Typography>
-                                    </div>
+                                        <embed src={item.attache} width={200} height={270} />
+                                        <Gap height={18} />
+                                        <p className="title-literature">{item.title}</p>
+                                        <Gap height={15} />
+                                        <div className="footer">
+                                            <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.author}</Typography>
+                                            <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.publication_date.split('-')[2]}</Typography>
+                                        </div>
+                                    </Link>
                                 </li>
                             )
                         })}

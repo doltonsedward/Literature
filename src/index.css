@@ -22,5 +22,6 @@ code {
 li:not(.native) { list-style: none; }
 
 .literature-default-padding {
+  margin-top: 100px;
   padding: var(--literature-default-padding);    
 }

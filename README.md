@@ -3,8 +3,8 @@
 - Loading for alert when fetching data
 - Customize select/option like mockup
 - Add expire token again, and manipulate in client if possible
-- Push notification when error
-- My literature in profile
+- Push notification when error (done)
+- Header need to be dynamic
 
 ## Done Slicing UI 
 - Landing Page
@@ -13,6 +13,14 @@
 - Home
 - Search-result
 - Profile
+- Collection
 
 ## Done Logic
-- Dynamic navbar in header
+- Push notif
+- PDF downloader
+
+## Bug
+empty right now
+
+## Bug fixed
+- Delay when fetching data profile, need watched (fixed)

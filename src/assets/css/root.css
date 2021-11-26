@@ -2,6 +2,7 @@
     --white: #ffffff;
     --low-white: #d1d1d1;
     --second-white: #BCBCBC;
+    --gray: #929292;
     --soft-black: #161616;
     --dark-red: #AF2E1C;
     --darkness-red: #6e2f27;
@@ -46,6 +47,7 @@
 
 
     --subtitle: var(--second-white);
+    --subtitle-alternate: var(--gray);
 
     /* border section */
     --border-trendy: 5px;

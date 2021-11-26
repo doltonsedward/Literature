@@ -1,3 +1,5 @@
+import { checkUser } from "./config"
+
 const initialValue = {
     isLogin: false,
     user: {}
@@ -10,7 +12,7 @@ const rootReducer = (state = initialValue, action) => {
         case 'USER_SUCCESS':
         case 'LOGIN':
             localStorage.setItem('token', payload.token)
-
+            
             return {
                 isLogin: true,
                 user: payload

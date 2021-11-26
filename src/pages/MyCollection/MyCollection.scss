@@ -1,0 +1,13 @@
+.collection {
+    .list-collection {
+        li {
+            width: 200px;
+            overflow: hidden;
+        }
+        
+        .footer {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

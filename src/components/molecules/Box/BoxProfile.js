@@ -24,7 +24,7 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
     }
 
     const muiBlockButton = {
-        ...muiRedButton,
+        color: 'var(--btn-secondary)',
         backgroundColor: 'var(--btn-block)',
         cursor: 'no-drop'
     }
@@ -75,7 +75,7 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
             </ul>
             <div className="profile-pic">
                 <div id="preview-thumbnail">
-                    <img src={preview ? preview : avatar} width={226} style={{ borderRadius: 'var(--border-trendy)' }} alt="your photo here" />
+                    <img src={preview ? preview : avatar} width={226} style={{ borderRadius: 'var(--border-trendy)' }} alt="your face will be here" />
                 </div>
                 <Gap height={14} />
                 {
@@ -85,7 +85,7 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
                         Choose photo
                     </Button>
                     :
-                    <Button variant="contained" fullWidth sx={muiBlockButton} className="button-input-file">Choose photo</Button>
+                    <Button fullWidth sx={muiBlockButton} className="button-input-file">Choose photo</Button>
                 }
             </div>
         </Box>
