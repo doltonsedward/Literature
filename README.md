@@ -13,6 +13,7 @@
 - Home
 - Search-result
 - Profile
+- Collection
 
 ## Done Logic
 - Dynamic navbar in header
