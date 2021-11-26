@@ -9,7 +9,6 @@ import { API } from '../../config'
 
 // MUI component
 import { Button } from '@mui/material'
-import { pushNotif } from '../../utils'
 
 const Home = () => {
     const history = useHistory()
@@ -43,13 +42,6 @@ const Home = () => {
         localStorage.setItem("search", JSON.stringify(inputData))
         history.push('/search-result')
     }
-
-    const notification = () => {
-        pushNotif({
-            title: 'Halo',
-            subtitle: 'Selamat datang'
-        })
-    }
     
     return (
         <div className="homepage">
@@ -65,7 +57,6 @@ const Home = () => {
                     </datalist>
                 </div>
                 <Button onClick={handleSubmit}><img src={iconSearch} alt="button for searching list book" /></Button>
-                <Button onClick={notification}><img src={iconSearch} alt="button for searching list book" /></Button>
             </div>
         </div>
     )

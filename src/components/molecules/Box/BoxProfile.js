@@ -75,7 +75,7 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
             </ul>
             <div className="profile-pic">
                 <div id="preview-thumbnail">
-                    <img src={preview ? preview : avatar} width={226} style={{ borderRadius: 'var(--border-trendy)' }} alt="your photo here" />
+                    <img src={preview ? preview : avatar} width={226} style={{ borderRadius: 'var(--border-trendy)' }} alt="your face will be here" />
                 </div>
                 <Gap height={14} />
                 {

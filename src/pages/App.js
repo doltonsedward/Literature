@@ -3,6 +3,7 @@ import store from '../store'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
+
 // import API
 import { API, setAuthToken } from '../config'
 
@@ -49,7 +50,12 @@ function App() {
       checkUser()
   }, [])
   
-  return <Routes />
+  return (
+    <>
+        
+        <Routes />
+    </>
+  )
 }
 
 export default App;

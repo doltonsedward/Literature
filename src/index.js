@@ -5,6 +5,7 @@ import './assets/css/root.css'
 import App from './pages/App';
 import store from './store'
 import { Provider } from "react-redux";
+import { Notifications } from 'react-push-notification'
 
 // import MUI component
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -30,6 +31,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
+        <Notifications />
         <App />
       </ThemeProvider>
     </Provider>
