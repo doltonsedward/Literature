@@ -1,6 +1,6 @@
 import './_Login.scss'
 import { Gap, Input } from '../..';
-import { muiWhiteButton } from '../../../utils';
+import { muiWhiteButton, pushNotif } from '../../../utils';
 import store from '../../../store';
 
 // MUI component
@@ -60,8 +60,10 @@ const Login = ({ isOpen, setIsOpen }) => {
                     payload: response.data.user
                 })    
 
-                setMessage('Login Success')
-                setSeverity('success')
+                pushNotif({
+                    title: 'Login successfully',
+                    message: 'Welcome back user'
+                })
             }
             
         } catch (error) {

@@ -6,6 +6,7 @@ import { logo } from '../../../assets'
 
 // import store
 import store from '../../../store'
+import { pushNotif } from '../../../utils'
 
 const Header = () => {
     const history = useHistory()
@@ -17,9 +18,18 @@ const Header = () => {
         color: 'var(--color-third)'
     }
 
+    const notification = () => {
+        pushNotif({
+            title: 'You logout successfully',
+            message: 'Welcome back if you want'
+        })
+    }
+
     const handleLogout = () => {
         const email = currentState.user.email
         const password = currentState.user.password
+
+        notification()
         store.dispatch({
             type: 'LOGOUT',
             payload: {
