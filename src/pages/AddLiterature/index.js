@@ -7,7 +7,7 @@ import {
     Typography 
 } from "@mui/material"
 import { useState } from 'react'
-import { muiRedButton, pushNotif } from '../../utils'
+import { pushNotif } from '../../utils'
 import { API } from '../../config'
 
 const AddLiterature = () => {
@@ -70,7 +70,6 @@ const AddLiterature = () => {
     }
 
     const submitButton = {
-        ...muiRedButton,
         float: 'right'
     }
     
