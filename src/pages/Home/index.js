@@ -2,18 +2,20 @@ import './_Home.scss'
 import React from 'react';
 import { iconSearch, logo } from "../../assets"
 import { Input, Gap } from '../../components'
+
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { pushNotif } from '../../utils';
 
-
 // import API
-import { API } from '../../config'
+import { API, checkUser, setAuthToken } from '../../config'
 
 // MUI component
 import { Button } from '@mui/material'
 
 const Home = () => {
+    const currentState = useSelector(state => state)
     const history = useHistory()
     const [dataLiterature, setDataLiterature] = useState([])
     const [inputData, setInputData] = useState({
@@ -41,9 +43,17 @@ const Home = () => {
             [e.target.name]: e.target.value
         })
     }
+
+    // for fetching setauth again
+    useEffect(()=> {
+        if (localStorage.token) {
+            setAuthToken(localStorage.token)
+        }
+    }, [currentState])
     
     useEffect(()=> {
         getLiterature()
+        checkUser()
     }, [])
 
     const handleSubmit = () => {
