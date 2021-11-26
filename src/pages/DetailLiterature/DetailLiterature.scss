@@ -1,0 +1,50 @@
+$marginBottomText: 10px;
+
+.detail-literature {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .section-one {
+        display: flex;
+        flex-wrap: wrap;
+        
+        embed {
+            width: 400px;
+            height: 543px;
+            margin-right: 46px;
+        }
+
+        li {
+            margin-bottom: 48px;
+            
+            .title {
+                width: 400px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 43px;
+                margin-bottom: $marginBottomText;
+            }
+            
+            .body {
+                font-size: 24px;
+                margin-bottom: $marginBottomText;
+    
+                &.isbn {
+                    color: var(--secondary)
+                }
+            }
+    
+            button {
+                img { margin-left: 14px }
+            }
+        }
+    }
+
+    .section-two {
+        button {
+            img { margin-left: 17px }
+        }
+    }
+}
