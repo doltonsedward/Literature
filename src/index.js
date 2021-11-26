@@ -10,7 +10,13 @@ import { Notifications } from 'react-push-notification'
 // import MUI component
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme()
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#AF2E1C'
+    }
+  }
+})
 
 theme.typography.h1 = {
   ...theme.typography.h1,
@@ -25,6 +31,12 @@ theme.typography.h2 = {
 theme.typography.subtitle1 = {
   ...theme.typography.subtitle1,
   fontFamily: "Avenir"
+}
+
+theme.typography.subtitle2 = {
+  ...theme.typography.subtitle2,
+  fontFamily: "Avenir",
+  color: 'var(--subtitle-alternate)'
 }
 
 ReactDOM.render(

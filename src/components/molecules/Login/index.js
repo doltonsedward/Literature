@@ -64,11 +64,11 @@ const Login = ({ isOpen, setIsOpen }) => {
                     title: 'Login successfully',
                     message: 'Welcome back user'
                 })
-            }
+            } 
             
         } catch (error) {
-            console.log(error)
-            setMessage('Email or password are incorrect')
+            const message = error?.response?.data.message || error?.response?.data?.error.message
+            setMessage(message)
             setSeverity('error')
         }
     }

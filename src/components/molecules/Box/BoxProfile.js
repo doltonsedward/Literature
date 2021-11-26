@@ -24,7 +24,7 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
     }
 
     const muiBlockButton = {
-        ...muiRedButton,
+        color: 'var(--btn-secondary)',
         backgroundColor: 'var(--btn-block)',
         cursor: 'no-drop'
     }
@@ -85,7 +85,7 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
                         Choose photo
                     </Button>
                     :
-                    <Button variant="contained" fullWidth sx={muiBlockButton} className="button-input-file">Choose photo</Button>
+                    <Button fullWidth sx={muiBlockButton} className="button-input-file">Choose photo</Button>
                 }
             </div>
         </Box>
