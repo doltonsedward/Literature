@@ -12,6 +12,7 @@ import Home from '../../pages/Home'
 import SearchResult from '../../pages/SearchResult'
 import Profile from '../../pages/Profile'
 import MyCollection from '../../pages/MyCollection'
+import AddLiterature from '../../pages/AddLiterature'
 
 const Routes = () => {
     const currentState = useSelector(state => state)
@@ -33,6 +34,9 @@ const Routes = () => {
                 </UserLoginRoute>
                 <UserLoginRoute path="/collection">
                     <MyCollection />
+                </UserLoginRoute>
+                <UserLoginRoute path="/add-literature">
+                    <AddLiterature />
                 </UserLoginRoute>
                 </>
             )}
