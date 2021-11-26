@@ -11,6 +11,8 @@ import { muiRedButton, pushNotif } from '../../utils'
 import { API } from '../../config'
 
 const AddLiterature = () => {
+    console.clear()
+
     const [preview, setPreview] = useState('')
     const [form, setForm] = useState({
         title: "",
@@ -54,15 +56,15 @@ const AddLiterature = () => {
             const response = await API.post('/literature', body, config)
 
             pushNotif({
-                title: response.data.status,
-                message: response.data.message
+                title: response?.data.status,
+                message: response?.data.message
             })
         } catch (error) {
-            const status = error.response.data.status
-            const message = error.response.data.message
+            const status = error?.response?.data.status
+            const message = error?.response?.data.message || error?.response?.data.error.message
             pushNotif({
-                title: status,
-                message
+                title: status ? status : 'Error',
+                message: message ? message : 'Unknow error'
             })
         }
     }
