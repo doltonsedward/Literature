@@ -17,6 +17,10 @@
 
 ## Done Logic
 - Push notif
+- PDF downloader
 
 ## Bug
-- Delay when fetching data profile, need watched
+empty right now
+
+## Bug fixed
+- Delay when fetching data profile, need watched (fixed)
