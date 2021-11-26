@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
 import { useSelector } from 'react-redux'
 
 import { UserLoginRoute } from './'
@@ -12,6 +11,7 @@ import LandingPage from '../../pages/LandingPage'
 import Home from '../../pages/Home'
 import SearchResult from '../../pages/SearchResult'
 import Profile from '../../pages/Profile'
+import MyCollection from '../../pages/MyCollection'
 
 const Routes = () => {
     const currentState = useSelector(state => state)
@@ -30,6 +30,9 @@ const Routes = () => {
                 </UserLoginRoute>
                 <UserLoginRoute path="/profile">
                     <Profile />
+                </UserLoginRoute>
+                <UserLoginRoute path="/collection">
+                    <MyCollection />
                 </UserLoginRoute>
                 </>
             )}
