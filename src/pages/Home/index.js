@@ -1,8 +1,11 @@
 import './_Home.scss'
+import React from 'react';
 import { iconSearch, logo } from "../../assets"
 import { Input, Gap } from '../../components'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
+import { pushNotif } from '../../utils';
+
 
 // import API
 import { API } from '../../config'
@@ -23,7 +26,12 @@ const Home = () => {
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
-            console.log(error)
+            const status = error.response.data.status
+            const message = error.response.data.message
+            pushNotif({
+                title: status,
+                message
+            })
         }
     }
 
@@ -44,7 +52,7 @@ const Home = () => {
     }
     
     return (
-        <div className="homepage">
+        <div className="homepage literature-default-padding">
             <img src={logo} width={489} alt="for searching your book" />
             <Gap height={40} />
             <div className="wrapper-search-list">

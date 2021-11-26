@@ -9,6 +9,7 @@ import { API } from '../../config'
 
 // MUI component
 import { Button, Skeleton, Typography } from '@mui/material'
+import { pushNotif } from '../../utils'
 
 const SearchResult = () => {
     const searchKey = JSON.parse(localStorage.search)
@@ -24,7 +25,12 @@ const SearchResult = () => {
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
-            console.log(error)
+            const status = error.response?.data.status
+            const message = error.response?.data.message
+            pushNotif({
+                title: status,
+                message
+            })
         }
     }
 

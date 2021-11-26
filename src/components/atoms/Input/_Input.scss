@@ -1,5 +1,4 @@
 .wrapper-input.default {
-
     .input-theme {
         padding: 10px 14px;
         height: 50;
@@ -7,7 +6,7 @@
         color: var(--input-color);
         background-color: var(--input-bg);
         border: none;
-        border: 2px solid #BCBCBC;
+        border: var(--input-border);
         border-radius: var(--border-trendy);
     
         &::placeholder {
@@ -15,3 +14,27 @@
         }
     }
 }
+
+.wrapper-input-file {
+    .input-theme {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding: 5px 13px;
+        color: var(--input-color);
+        background-color: var(--input-bg);
+        border-radius: var(--border-trendy);
+        border: none;
+        border: var(--input-border);
+        cursor: pointer;
+
+        input {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+    }
+} 

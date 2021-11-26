@@ -51,7 +51,9 @@ const Header = () => {
                     <li onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</li>
                 </ul>
             </nav>
-            <img src={logo} alt="This is literature" />
+            <Link to="/">
+                <img src={logo} alt="This is literature" />
+            </Link>
         </header>
     )
 }

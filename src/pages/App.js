@@ -50,12 +50,7 @@ function App() {
       checkUser()
   }, [])
   
-  return (
-    <>
-        
-        <Routes />
-    </>
-  )
+  return <Routes />
 }
 
 export default App;

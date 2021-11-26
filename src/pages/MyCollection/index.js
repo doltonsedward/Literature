@@ -16,9 +16,11 @@ const MyCollection = () => {
             const response = await API.get('/collection/' + currentState.user.id)
             setCollection(response.data.collection)
         } catch (error) {
+            const status = error.response.data.status
+            const message = error.response.data.message
             pushNotif({
-                title: 'Error',
-                message: 'Internal server error'
+                title: status,
+                message
             })
         }
     }
