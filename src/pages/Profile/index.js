@@ -1,17 +1,19 @@
 import './_Profile.scss'
 import { BoxProfle, Gap } from '../../components'
-import { API } from '../../config'
-import { muiRedButton, muiWhiteButton } from '../../utils'
+import { API, checkUser } from '../../config'
+import { muiWhiteButton, pushNotif } from '../../utils'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 // MUI component
-import { Button, Typography } from '@mui/material'
+import { Button, Typography, Stack } from '@mui/material'
+import { useEffect } from 'react'
 
 const Profile = () => {
     const currentState = useSelector(state => state)
     const { email, phone, address, gender, avatar } = currentState?.user
 
+    const [ownerLiterature, setOwnerLiterature] = useState([])
     const [preview, setPreview] = useState(avatar)
     const [editable, setEditable] = useState(false)
     const [form, setForm] = useState({
@@ -22,12 +24,24 @@ const Profile = () => {
         avatar
     })
     
-    const newMuiRedButton = {
-        ...muiRedButton,
-        marginRight: '10px'
+    const getOwnerLiterature = async () => {
+        try {
+            const response = await API.get('/profile/' + currentState.user.id + '/literature')
+            
+            setOwnerLiterature(response?.data.literatures)
+        } catch (error) {
+            const status = error?.response?.data.status
+            const message = error?.response?.data.message
+            pushNotif({
+                title: status,
+                message
+            })
+        }
     }
 
-    console.log(form)
+    useEffect(()=> {
+        getOwnerLiterature()
+    }, [])
 
     const handleSubmit = async () => {
         try {
@@ -46,10 +60,33 @@ const Profile = () => {
 
             const body = formData
 
-            await API.patch('/user', body, config)
+            const response = await API.patch('/user', body, config)
+
+            pushNotif({
+                title: response?.data.status,
+                message: response?.data.message
+            })
+
+            checkUser()
+            setEditable(!editable)
         } catch (error) {
-            console.log(error)
+            if (!editable) {
+                return pushNotif({
+                    title: "Error",
+                    message: "Click the edit button first"
+                })
+            }
+
+            pushNotif({
+                title: "Error",
+                message: "You must upload photo first"
+            })
         }
+    }
+
+    // styling
+    const newMuiRedButton = {
+        marginRight: '10px'
     }
     
     return (
@@ -64,7 +101,23 @@ const Profile = () => {
             <BoxProfle editable={editable} form={form} preview={preview} setForm={setForm} setPreview={setPreview} />
             <Gap height={61} />
 
-            <Typography variant="h2" component="div" className="heading">My Literature</Typography>
+            <Typography variant="h1" component="h1" className="heading">My Literature</Typography>
+            <Gap height={41} />
+            <ul className="list-owner-literature">
+                {ownerLiterature?.map((item, i) => {
+                    return (
+                        <li key={i}>
+                            <embed src={item?.attache} />
+                            <Typography variant="h2" component="h2" className="title">{item.title}</Typography>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography variant="subtitle1" component="p" className="body">{item.author}</Typography>
+                                <Typography variant="subtitle1" component="p" className="body">{item.publication_date}</Typography>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
+            <Gap height={75} />
         </div>
     )
 }
