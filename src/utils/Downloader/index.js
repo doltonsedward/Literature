@@ -1,6 +1,6 @@
 import { pushNotif } from ".."
 
-const downloadFile = async (fileURL, filename) => {
+const downloadPDF = async (fileURL, filename) => {
     try {
         const config = {
             method: 'GET',
@@ -34,4 +34,4 @@ const downloadFile = async (fileURL, filename) => {
     }
 }
 
-export { downloadFile }
+export { downloadPDF }
