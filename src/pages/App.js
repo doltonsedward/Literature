@@ -1,7 +1,5 @@
 import './App.css'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-
 
 // import API
 import { checkUser, setAuthToken } from '../config'
@@ -14,15 +12,7 @@ if (localStorage.token) {
 }
 
 function App() {
-    console.clear()
-  const currentState = useSelector(state => state)
-    
-  useEffect(()=> {
-      if (localStorage.token) {
-          setAuthToken(localStorage.token)
-      }
-  }, [currentState])
-
+  console.clear()
   useEffect(()=> {
       checkUser()
   }, [])
