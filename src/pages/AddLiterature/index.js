@@ -1,5 +1,5 @@
 import './AddLiterature.scss'
-import { Input, Gap } from '../../components'
+import { Input, Gap, Header } from '../../components'
 
 // MUI component
 import { 
@@ -74,36 +74,39 @@ const AddLiterature = () => {
     }
     
     return (
-        <div className="add-literature literature-default-padding">
-            <Typography variant="h2" component="h1" style={{ fontSize: 36 }}>Add Literature</Typography>
-            <Gap height={50} />
-            <ul className="list-input">
-                <li>
-                    <Input name="title" value={form.title} onChange={handleChange} placeholder="Title" />
-                </li>
-                <li>
-                    <Input type="date" name="publication_date" onChange={handleChange} placeholder="Publication Date" />
-                </li>
-                <li>
-                    <Input type="number" name="pages" value={form.pages} onChange={handleChange} placeholder="Pages" />
-                </li>
-                <li>
-                    <Input type="number" name="ISBN" value={form.ISBN} onChange={handleChange} placeholder="ISBN" />
-                </li>
-                <li>
-                    <Input name="author" value={form.author} onChange={handleChange} placeholder="Author, ex: Doltons Ed, Astiana" />
-                </li>
-                <li>
-                    <Input name="attache" variant="file" onChange={handleChange} />
-                </li>
-                <li>
-                    {preview && <embed src={preview} />}
-                </li>
-            </ul>
-            <Gap height={55} />
-            <Button variant="contained" sx={submitButton} onClick={handleSubmit}>add literature</Button>
-            <Gap height={77} />
-        </div>
+        <>
+            <Header activeIn="add-literature" />
+            <div className="add-literature literature-default-padding">
+                <Typography variant="h2" component="h1" style={{ fontSize: 36 }}>Add Literature</Typography>
+                <Gap height={50} />
+                <ul className="list-input">
+                    <li>
+                        <Input name="title" value={form.title} onChange={handleChange} placeholder="Title" />
+                    </li>
+                    <li>
+                        <Input type="date" name="publication_date" onChange={handleChange} placeholder="Publication Date" />
+                    </li>
+                    <li>
+                        <Input type="number" name="pages" value={form.pages} onChange={handleChange} placeholder="Pages" />
+                    </li>
+                    <li>
+                        <Input type="number" name="ISBN" value={form.ISBN} onChange={handleChange} placeholder="ISBN" />
+                    </li>
+                    <li>
+                        <Input name="author" value={form.author} onChange={handleChange} placeholder="Author, ex: Doltons Ed, Astiana" />
+                    </li>
+                    <li>
+                        <Input name="attache" variant="file" onChange={handleChange} />
+                    </li>
+                    <li>
+                        {preview && <embed src={preview} />}
+                    </li>
+                </ul>
+                <Gap height={55} />
+                <Button variant="contained" sx={submitButton} onClick={handleSubmit}>add literature</Button>
+                <Gap height={77} />
+            </div>
+        </>
     )
 }
 

@@ -1,12 +1,13 @@
 import './_Profile.scss'
-import { BoxProfle, Gap } from '../../components'
+import { BoxProfle, Gap, Header } from '../../components'
 import { API, checkUser } from '../../config'
 import { muiWhiteButton, pushNotif } from '../../utils'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { imgBlank } from '../../assets'
 
 // MUI component
-import { Button, Typography, Stack } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { useEffect } from 'react'
 
 const Profile = () => {
@@ -90,35 +91,46 @@ const Profile = () => {
     }
     
     return (
-        <div className="profile literature-default-padding">
-            <Typography variant="h2" component="div" className="heading">Profile</Typography>
-            <Gap height={39} />
+        <>
+            <Header activeIn="profile" />
+            <div className="profile literature-default-padding">
+                <Typography variant="h2" component="div" className="heading">Profile</Typography>
+                <Gap height={39} />
 
-            <div className="wrapper-action-button">
-                <Button variant="contained" sx={newMuiRedButton} onClick={()=> setEditable(!editable)}>edit</Button>
-                <Button variant="contained" sx={muiWhiteButton} onClick={handleSubmit}>post</Button>
+                <div className="wrapper-action-button">
+                    <Button variant="contained" sx={newMuiRedButton} onClick={()=> setEditable(!editable)}>edit</Button>
+                    <Button variant="contained" sx={muiWhiteButton} onClick={handleSubmit}>post</Button>
+                </div>
+                <BoxProfle editable={editable} form={form} preview={preview} setForm={setForm} setPreview={setPreview} />
+                <Gap height={61} />
+
+                <Typography variant="h1" component="h1" className="heading">My Literature</Typography>
+                <Gap height={41} />
+                {
+                    ownerLiterature.length ?
+                    <ul className="list-owner-literature">
+                        {ownerLiterature?.map((item, i) => {
+                            return (
+                                <li key={i}>
+                                    <embed src={item?.attache} />
+                                    <Typography variant="h2" component="h2" className="title">{item.title}</Typography>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <Typography variant="subtitle1" component="p" className="body">{item.author}</Typography>
+                                        <Typography variant="subtitle1" component="p" className="body">{item.publication_date}</Typography>
+                                    </div>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    :
+                    <div className="blank-image">
+                        <img src={imgBlank} alt="your literature is empty, get a rest" />
+                        <Typography variant="subtitle1" component="p" className="cover-empty-image">Your literature is empty right now</Typography>
+                    </div>
+                }
+                <Gap height={75} />
             </div>
-            <BoxProfle editable={editable} form={form} preview={preview} setForm={setForm} setPreview={setPreview} />
-            <Gap height={61} />
-
-            <Typography variant="h1" component="h1" className="heading">My Literature</Typography>
-            <Gap height={41} />
-            <ul className="list-owner-literature">
-                {ownerLiterature?.map((item, i) => {
-                    return (
-                        <li key={i}>
-                            <embed src={item?.attache} />
-                            <Typography variant="h2" component="h2" className="title">{item.title}</Typography>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography variant="subtitle1" component="p" className="body">{item.author}</Typography>
-                                <Typography variant="subtitle1" component="p" className="body">{item.publication_date}</Typography>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
-            <Gap height={75} />
-        </div>
+        </>
     )
 }
 

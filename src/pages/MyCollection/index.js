@@ -1,14 +1,18 @@
 import './MyCollection.scss'
-import { Gap } from '../../components'
-
-// MUI component
-import { Typography } from "@mui/material"
+import { imgBlank } from '../../assets'
+import { Gap, Header } from '../../components'
+import { pushNotif } from "../../utils"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+
+// import API
 import { API } from "../../config"
-import { pushNotif } from "../../utils"
+
+// MUI component
+import { Typography, Button } from "@mui/material"
 
 const MyCollection = () => {
+    const [isAction, setIsAction] = useState(false)
     const [collection, setCollection] = useState([])
     const currentState = useSelector(state => state)
     
@@ -29,28 +33,45 @@ const MyCollection = () => {
     useEffect(()=> {
         getCollection()
     }, [])
+
+    const buttonStyle = `action-button${isAction ? ' active' : ''}`
     
     return (
-        <div className="collection literature-default-padding">
-            <Typography variant="h2" component="h1" style={{ fontSize: 36 }}>My Collection</Typography>
-            <Gap height={41} />
-            <ul className="list-collection">
-                {collection?.map((item, i) => {
-                    return (
-                        <li key={i}>
-                            <embed src={item.literature.attache} style={{ borderRadius: 10 }} width={200} height={270} />
-                            <Gap height={18} />
-                            <p className="title-literature">{item.literature.title}</p>
-                            <Gap height={15} />
-                            <div className="footer">
-                                <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.literature.author}</Typography>
-                                <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.literature.publication_date.split('-')[2]}</Typography>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+        <>
+            <Header activeIn="collection" />
+            <div className="collection literature-default-padding">
+                <div className="header-collection">
+                    <Typography variant="h2" component="h1" style={{ fontSize: 36 }}>My Collection</Typography>
+                    <Button variant="contained" onClick={()=> setIsAction(!isAction)}>action</Button>
+                </div>
+                <Gap height={41} />
+                {
+                    collection.length ? 
+                    <ul className="list-collection">
+                        {collection?.map((item, i) => {
+                            return (
+                                <li key={i}>
+                                    <embed src={item.literature.attache} style={{ borderRadius: 10 }} width={200} height={270} />
+                                    <Gap height={18} />
+                                    <p className="title-literature">{item.literature.title}</p>
+                                    <Gap height={15} />
+                                    <div className="footer">
+                                        <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.literature.author}</Typography>
+                                        <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.literature.publication_date.split('-')[2]}</Typography>
+                                    </div>
+                                    <Button variant="contained" className={buttonStyle}>delete</Button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    :
+                    <div className="blank-image">
+                        <img src={imgBlank} alt="your literature is empty, get a rest" />
+                        <Typography variant="subtitle1" component="p" className="cover-empty-image">Your literature is empty right now</Typography>
+                    </div>
+                }
+            </div>
+        </>
     )
 }
 
