@@ -13,4 +13,20 @@ const muiWhiteButton = {
     }
 }
 
-export { muiRedButton, muiWhiteButton }
+const muiButtonCancel = {
+    backgroundColor: '#FF0742',
+    marginRight: '2px',
+    '&:hover': {
+        backgroundColor: '#e7476c'
+    }
+}
+
+const muiButtonApprove = {
+    backgroundColor: '#0ACF83',
+    marginLeft: '2px',
+    '&:hover': {
+        backgroundColor: '#31d898'
+    }
+}
+
+export { muiRedButton, muiWhiteButton, muiButtonCancel, muiButtonApprove }
