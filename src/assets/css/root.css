@@ -5,6 +5,9 @@
     --gray: #929292;
     --soft-black: #161616;
     --dark-red: #AF2E1C;
+    --orange: #F7941E;
+    --green: #1caf34;
+    --low-green: #4be68b;
     --darkness-red: #6e2f27;
     --low-red: #be4c3d;
     --gray-smooth: #252525;
@@ -17,7 +20,10 @@
     --secondary-effect: var(--low-red);
     --third: var(--white);
     --third-effect: var(--low-white);
+    --success: var(--green);
+    --waiting: var(--yellow);
 
+    
     --text-color-primary: var(--white);
 
     
@@ -36,6 +42,8 @@
 
     /* border */
     --border-trendy: 5px;
+    --border-circle: 50%;
+    --border-profile-color: var(--third);
 
 
     /* button section */

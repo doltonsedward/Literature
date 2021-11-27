@@ -43,7 +43,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <Notifications />
+        <Notifications position="top-right" />
         <App />
       </ThemeProvider>
     </Provider>

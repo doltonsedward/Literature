@@ -12,5 +12,8 @@ import iconFile from './icon/file.svg'
 import iconDownload from './icon/download.svg'
 import iconCollection from './icon/collection.svg'
 
+import imgBlank from './img/blank.svg'
+
 export { logo, coverImg, iconSearch }
 export { iconEmail, iconGender, iconLocation, iconPhone, iconFile, iconDownload, iconCollection }
+export { imgBlank }
