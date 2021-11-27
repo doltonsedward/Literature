@@ -1,0 +1,7 @@
+.admin {
+    min-height: calc(100vh - 100px);
+    color: var(--primary);
+    background-color: var(--third);
+}
+
+.status.warning { color: 'yellow' }
