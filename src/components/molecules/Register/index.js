@@ -21,9 +21,10 @@ import { muiRedButton } from '../../../utils';
 import { API } from '../../../config/API'
 
 const Register = ({ isOpen, setIsOpen }) => {
+    console.clear()
     const [open, setOpen] = React.useState(false)
     const [message, setMessage] = React.useState('Loading..')
-    const [severity, setSeverity] = React.useState('success')
+    const [severity, setSeverity] = React.useState('info')
 
     const [form, setForm] = useState({
         email: "",
@@ -59,10 +60,9 @@ const Register = ({ isOpen, setIsOpen }) => {
                 setMessage('Register Success')
                 setSeverity('success')
             } 
-            
         } catch (error) {
-            console.log(JSON.parse(error))
-            setMessage('Internal server error')
+            const messageError = error?.response?.data?.error?.message || error.response.data.message
+            setMessage(messageError)
             setSeverity('error')
         }
     }
@@ -121,7 +121,7 @@ const Register = ({ isOpen, setIsOpen }) => {
                 <Fade in={isOpen}>
                     <Box sx={style}>
                         <Box sx={{ padding: '41px 33px 37px', borderRadius: '5px' }}>
-                            <Typography variant="h2" component="div">Sign in</Typography>
+                            <Typography variant="h2" component="div">Sign up</Typography>
                             <Gap height={29} />
                             <Input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email" />
                             <Gap height={20} />
@@ -135,7 +135,7 @@ const Register = ({ isOpen, setIsOpen }) => {
                             <Gap height={20} />
                             <Input name="address" value={form.address} onChange={handleChange} variant="field" placeholder="Address" />
                             <Gap height={36} />
-                            <Button variant="contained" sx={submitBtn} onClick={registerSession}>sign in</Button>
+                            <Button variant="contained" sx={submitBtn} onClick={registerSession}>Sign up</Button>
                         </Box>
                     </Box>
                 </Fade>

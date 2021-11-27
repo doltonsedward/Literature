@@ -1,4 +1,5 @@
 import './_Login.scss'
+import { useHistory } from 'react-router';
 import { Gap, Input } from '../..';
 import { muiWhiteButton, pushNotif } from '../../../utils';
 import store from '../../../store';
@@ -21,9 +22,10 @@ import {
 import { API } from '../../../config/API'
 
 const Login = ({ isOpen, setIsOpen }) => {
+    const history = useHistory()
     const [open, setOpen] = React.useState(false)
     const [message, setMessage] = React.useState('Loading..')
-    const [severity, setSeverity] = React.useState('success')
+    const [severity, setSeverity] = React.useState('info')
 
     const [form, setForm] = React.useState({
         email: "",
@@ -62,9 +64,11 @@ const Login = ({ isOpen, setIsOpen }) => {
 
                 pushNotif({
                     title: 'Login successfully',
-                    message: 'Welcome back user'
-                })
+                    message: 'Welcome user'
+                }, 'success')
             } 
+
+            history.push('/')
             
         } catch (error) {
             const message = error?.response?.data.message || error?.response?.data?.error.message
