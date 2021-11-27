@@ -1,10 +1,10 @@
 ## Things to do
 - Gender in input, change to option
-- Loading for alert when fetching data
+- Loading for alert when fetching data (done)
 - Customize select/option like mockup
 - Add expire token again, and manipulate in client if possible
 - Push notification when error (done)
-- Header need to be dynamic
+- Header need to be dynamic (done)
 
 ## Done Slicing UI 
 - Landing Page
@@ -14,6 +14,7 @@
 - Search-result
 - Profile
 - Collection
+- Detail literature
 
 ## Done Logic
 - Push notif
