@@ -1,17 +1,23 @@
 import './AddLiterature.scss'
 import { Input, Gap, Header } from '../../components'
+import { pdfStyle } from '../../assets'
+import { pushNotif } from '../../utils'
+import { API } from '../../config'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 
 // MUI component
 import { 
     Button,
-    Typography 
+    Typography,
+    Skeleton
 } from "@mui/material"
-import { useState } from 'react'
-import { pushNotif } from '../../utils'
-import { API } from '../../config'
 
 const AddLiterature = () => {
     console.clear()
+
+    const currentState = useSelector(state => state)
 
     const [preview, setPreview] = useState('')
     const [form, setForm] = useState({
@@ -58,7 +64,7 @@ const AddLiterature = () => {
             pushNotif({
                 title: response?.data.status,
                 message: response?.data.message
-            })
+            }, 'success')
         } catch (error) {
             const status = error?.response?.data.status
             const message = error?.response?.data.message || error?.response?.data.error.message
@@ -67,6 +73,15 @@ const AddLiterature = () => {
                 message: message ? message : 'Unknow error'
             })
         }
+    }
+
+    const onDocumentLoadSuccess = ({ numPages }) => {
+        setForm({
+            ...form,
+            title: form.attache[0].name.split('.')[0],
+            pages: numPages,
+            author: currentState.user.fullName
+        })
     }
 
     const submitButton = {
@@ -99,7 +114,19 @@ const AddLiterature = () => {
                         <Input name="attache" variant="file" onChange={handleChange} />
                     </li>
                     <li>
-                        {preview && <embed src={preview} />}
+                        {preview && (
+                            <Document
+                                file={form.attache[0]}
+                                className={pdfStyle.pdfreader}
+                                onLoadSuccess={onDocumentLoadSuccess}
+                                loading={<Skeleton variant="rectangular" width={200} height={270} />}
+                            >
+                                <Page 
+                                    pageNumber={1} 
+                                    renderTextLayer={false}
+                                />
+                            </Document>
+                        )}
                     </li>
                 </ul>
                 <Gap height={55} />

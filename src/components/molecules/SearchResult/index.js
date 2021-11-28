@@ -1,19 +1,23 @@
-import './_SearchResult.scss'
+import './SearchResult.scss'
 
-import { iconSearch } from "../../../assets"
+import { iconSearch, pdfStyle } from "../../../assets"
 import { Gap, Input, Header } from '../..'
+import { pushNotif } from '../../../utils'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { pushNotif } from '../../../utils'
+
+import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 
 // import API
 import { API } from '../../../config'
 
 // MUI component
-import { Button, Skeleton, Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 
 const SearchResult = ({ searchKey }) => {
     const [dataLiterature, setDataLiterature] = useState([])
+    const [numPages, setNumPages] = useState(null);
+    const [pageNumber, setPageNumber] = useState(1);
     const [inputData, setInputData] = useState({
         title: !searchKey ? '' : searchKey.title,
         public_year: ""
@@ -41,20 +45,18 @@ const SearchResult = ({ searchKey }) => {
         })
     }
 
-    useEffect(()=> {
-        getLiterature()
-    }, [])
+    function onDocumentLoadSuccess({ numPages }) {
+        setNumPages(numPages);
+    }
 
     const handleSubmit = () => {
         localStorage.setItem("search", JSON.stringify(inputData))
         getLiterature()
     }
 
-    const [loading, setLoading] = useState(true)
-
-    setTimeout(()=> {
-        setLoading(false)
-    }, 2000)
+    useEffect(()=> {
+        getLiterature()
+    }, [])
 
     return (
         <>
@@ -95,16 +97,19 @@ const SearchResult = ({ searchKey }) => {
                                 return (
                                     <li key={i}>
                                         <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
-                                            {loading && 
-                                                <Skeleton 
-                                                    style={{ backgroundColor: 'var(--third)', borderRadius: 'var(--border-trendy)', position: 'absolute' }} 
-                                                    variant="rectangular" 
-                                                    width={200} 
-                                                    height={270}
+                                            <Document
+                                                file={item.attache}
+                                                onLoadSuccess={onDocumentLoadSuccess}
+                                                className={pdfStyle.pdfreader}
+                                                loading="Wait.."
+                                            >
+                                                <Page 
+                                                    pageNumber={1} 
+                                                    renderTextLayer={false}
                                                 />
-                                            }
-
-                                            <embed src={item.attache} width={200} height={270} />
+                                            </Document>
+                                            
+                                            {/* <embed src={`${item.attache}#toolbar=0&navpanes=0&scrollbar=0"`} type="application/pdf" /> */}
                                             <Gap height={18} />
                                             <p className="title-literature">{item.title}</p>
                                             <Gap height={15} />
