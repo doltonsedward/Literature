@@ -5,6 +5,12 @@
 - Add expire token again, and manipulate in client if possible
 - Push notification when error (done)
 - Header need to be dynamic (done)
+- PDF viewer 
+- Push notif (done)
+- PDF downloader (done)
+- Dynamic collection, add / remove (done)
+- Fix problem in react-pdf (done)
+- Clean up code
 
 ## Done Slicing UI 
 - Landing Page
@@ -15,10 +21,7 @@
 - Profile
 - Collection
 - Detail literature
-
-## Done Logic
-- Push notif
-- PDF downloader
+- Admin page
 
 ## Bug
 empty right now

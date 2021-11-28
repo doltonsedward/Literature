@@ -1,4 +1,5 @@
 $marginBottomText: 10px;
+$space-button: 5px;
 
 .detail-literature {
     display: flex;
@@ -6,14 +7,81 @@ $marginBottomText: 10px;
     flex-wrap: wrap;
 
     .section-one {
+        position: relative;
         display: flex;
         flex-wrap: wrap;
-        
-        embed {
+
+        .wrapper-pdf {
+            position: relative;
             width: 400px;
             height: 543px;
             margin-right: 46px;
+
+            &:hover .button-pages {
+                opacity: 1;
+                transition: .3s ease-out;
+            }
+
+            .button-pages {
+                opacity: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                position: absolute;
+                bottom: 10px;
+                z-index: 8;
+                transition: .3s ease-in;
+
+                .inner-button-pages {
+                    background-color: var(--third);
+                    box-shadow: var(--shadow-button-pdf);
+                    border-radius: var(--border-trendy);
+
+                    .btn {
+                        width: 60px;
+                        height: 40px;
+                        cursor: pointer;
+                        border: none;
+                        border-radius: var(--border-trendy);
+                        background-color: var(--third);
+                        box-shadow: none;
+                    }
+
+                    .prev-button {
+                        margin-right: $space-button;
+                        color: var(--primary);
+                    }
+
+                    .detail {
+                        color: var(--primary);
+                    }
+
+                    .next-button {
+                        margin-left: $space-button;
+                        color: var(--primary);
+                    }
+                }
+            }
+            
+            .pdf-reader {
+                overflow: hidden;
+                pointer-events: none;
+                border-radius: 5px;
+                
+                canvas {
+                    width: 400px !important;
+                    height: 543px !important;
+                    object-fit: cover;
+                    border-radius: 5px;
+    
+                    ::selection {
+                        background-color: transparent;
+                    }
+                }
+            }
         }
+
 
         li {
             margin-bottom: 48px;
@@ -44,7 +112,12 @@ $marginBottomText: 10px;
 
     .section-two {
         button {
-            img { margin-left: 17px }
+            p {
+                display: flex;
+                align-items: center;
+
+                .icon { margin-left: 17px }
+            }
         }
     }
 }

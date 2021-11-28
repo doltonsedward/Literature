@@ -13,7 +13,6 @@ import MyCollection from '../../pages/MyCollection'
 import AddLiterature from '../../pages/AddLiterature'
 import DetailLiterature from '../../pages/DetailLiterature'
 import { Verification } from '../../pages/Admin'
-import NotFound from '../../pages/NotFound'
 
 const Routes = () => {
     const currentState = useSelector(state => state)
@@ -21,8 +20,8 @@ const Routes = () => {
     return (
         <>
             {currentState.isLoading ? (
-                <div class="loading-section">
-                    <div class="loading">
+                <div className="loading-section">
+                    <div className="loading">
                         <p>loading</p>
                         <span></span>
                     </div>

@@ -2,6 +2,8 @@
     outline: none;
 }
 
+.no-drop { cursor: no-drop }
+
 .blank-image {
     text-align: center;
 }

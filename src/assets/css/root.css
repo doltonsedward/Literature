@@ -12,7 +12,6 @@
     --low-red: #be4c3d;
     --gray-smooth: #252525;
 
-
     /* theme section */
     --primary: var(--soft-black);
     --primary-alternate: var(--gray-smooth);
@@ -22,7 +21,6 @@
     --third-effect: var(--low-white);
     --success: var(--green);
     --waiting: var(--yellow);
-
     
     --text-color-primary: var(--white);
 
@@ -61,5 +59,8 @@
     --border-trendy: 5px;
 
     /* padding section */
-    --literature-default-padding: 20px 70px
+    --literature-default-padding: 20px 70px;
+
+    /* shadow section */
+    --shadow-button-pdf: 0 10px 40px rgba(0, 0, 0, .3);
 }

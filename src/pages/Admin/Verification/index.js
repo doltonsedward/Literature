@@ -92,6 +92,7 @@ const Verification = () => {
                     component="h1" 
                     fontFamily="Avenir" 
                     fontSize={36}
+                    className="title"
                 >
                     Book verification
                 </Typography>

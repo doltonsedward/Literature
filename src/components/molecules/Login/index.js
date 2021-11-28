@@ -4,6 +4,9 @@ import { Gap, Input } from '../..';
 import { muiWhiteButton, pushNotif } from '../../../utils';
 import store from '../../../store';
 
+// oauth
+// import GoogleLogin from 'react-google-login'
+
 // MUI component
 import * as React from 'react';
 import { 
@@ -112,6 +115,10 @@ const Login = ({ isOpen, setIsOpen }) => {
         height: 50
     }
 
+    const responseGoogle = (response) => {
+        console.log(response)
+    }
+
     return (
         <div>
             <Modal
@@ -135,6 +142,16 @@ const Login = ({ isOpen, setIsOpen }) => {
                             <Input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Password" />
                             <Gap height={36} />
                             <Button variant="contained" sx={submitBtn} onClick={loginSession}>sign in</Button>
+
+                            {/* oauth session */}
+                            {/* <div>
+                                <GoogleLogin 
+                                    clientId="1076583809766-f70m00reofepf768mcmue39qrm7gbch6.apps.googleusercontent.com"
+                                    buttonText="Login"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                />
+                            </div> */}
                         </Box>
                     </Box>
                 </Fade>

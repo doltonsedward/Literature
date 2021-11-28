@@ -2,6 +2,10 @@
     min-height: calc(100vh - 100px);
     color: var(--primary);
     background-color: var(--third);
+
+    .title {
+        margin-top: 59px;
+    }
 }
 
 .status.warning { color: 'yellow' }

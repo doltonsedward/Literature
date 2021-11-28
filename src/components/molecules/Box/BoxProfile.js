@@ -5,7 +5,12 @@ import { Gap, Input } from '../..'
 import { useSelector } from 'react-redux'
 
 // MUI component
-import { Box, Typography, Button } from '@mui/material'
+import { 
+    Box, 
+    Typography, 
+    Button, 
+    Tooltip 
+} from '@mui/material'
 
 const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
     const currentState = useSelector(state => state)
@@ -85,7 +90,9 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
                         Choose photo
                     </Button>
                     :
-                    <Button fullWidth sx={muiBlockButton} className="button-input-file">Choose photo</Button>
+                    <Tooltip title="You can't change anything without first clicking the EDIT button" followCursor>
+                        <Button fullWidth sx={muiBlockButton} className="button-input-file">Choose photo</Button>
+                    </Tooltip>
                 }
             </div>
         </Box>
