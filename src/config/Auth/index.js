@@ -13,7 +13,7 @@ const checkUser = async () => {
         
         let payload = response.data.data.user
         
-        payload.token = localStorage.token;
+        payload.token = localStorage.token
 
         store.dispatch({
             type: "AUTH_SUCCESS",
