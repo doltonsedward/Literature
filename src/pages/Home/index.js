@@ -28,8 +28,8 @@ const Home = () => {
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
-            const status = error.response.data.status
-            const message = error.response.data.message
+            const status = error?.response?.data.status
+            const message = error?.response?.data.message
             pushNotif({
                 title: status,
                 message
