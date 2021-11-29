@@ -16,6 +16,7 @@ import {
 } from '@mui/material'
 
 const Profile = () => {
+    console.clear()
     const currentState = useSelector(state => state)
     const { email, phone, address, gender, avatar } = currentState?.user
 

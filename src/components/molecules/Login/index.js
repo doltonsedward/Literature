@@ -1,7 +1,7 @@
 import './_Login.scss'
 import { useHistory } from 'react-router';
 import { Gap, Input } from '../..';
-import { muiWhiteButton, pushNotif } from '../../../utils';
+import { muiWhiteButton, pushNotif, randomPass } from '../../../utils';
 import store from '../../../store';
 
 // oauth
@@ -115,8 +115,41 @@ const Login = ({ isOpen, setIsOpen }) => {
         height: 50
     }
 
-    const responseGoogle = (response) => {
-        console.log(response)
+    const responseGoogle = async (response) => {
+        const randomPassword = randomPass("Testing", 5, "Testes4")
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            const body = {
+                token: response.tokenId,
+                password: randomPassword
+            }
+
+            const responseAuth = await API.post('/auth/google', body, config)
+
+            if (responseAuth?.status === 200) {
+                store.dispatch({ 
+                    type: 'LOGIN', 
+                    payload: responseAuth.data.user
+                })    
+
+                pushNotif({
+                    title: 'Login successfully',
+                    message: 'Welcome user'
+                }, 'success')
+            } 
+
+            history.push('/')  
+        } catch (error) {
+            const message = error?.response?.data.message || error?.response?.data?.error.message
+            setMessage(message)
+            setSeverity('error')
+        }
     }
 
     return (
@@ -150,6 +183,7 @@ const Login = ({ isOpen, setIsOpen }) => {
                                     buttonText="Login"
                                     onSuccess={responseGoogle}
                                     onFailure={responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
                                 />
                             </div>
                         </Box>
