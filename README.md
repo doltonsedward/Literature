@@ -11,6 +11,7 @@
 - Dynamic collection, add / remove (done)
 - Fix all bug and problem in react-pdf (done)
 - Clean up code (almost done)
+- Add google oauth client (done)
 
 ## Done Slicing UI 
 - Landing Page
@@ -22,9 +23,6 @@
 - Collection
 - Detail literature
 - Admin page
-
-## Bug
-empty right now
 
 ## Bug fixed
 - Delay when fetching data profile, need watched (fixed)
