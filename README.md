@@ -1,16 +1,16 @@
 ## Things to do
 - Gender in input, change to option
 - Loading for alert when fetching data (done)
-- Customize select/option like mockup
-- Add expire token again, and manipulate in client if possible
+- Customize select/option like mockup (done)
+- Add expire token again, and manipulate in client if possible (done)
 - Push notification when error (done)
 - Header need to be dynamic (done)
-- PDF viewer 
+- PDF viewer (done)
 - Push notif (done)
 - PDF downloader (done)
 - Dynamic collection, add / remove (done)
-- Fix problem in react-pdf (done)
-- Clean up code
+- Fix all bug and problem in react-pdf (done)
+- Clean up code (almost done)
 
 ## Done Slicing UI 
 - Landing Page
