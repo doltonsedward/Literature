@@ -29,7 +29,7 @@ const Verification = () => {
 
     const getAllData = async () => {
         try {
-            const response = await API.get('/literatures')
+            const response = await API.get('/literatures/admin')
             setLiteratures(response.data.literatures)
         } catch (error) {
             pushNotif({
@@ -71,13 +71,13 @@ const Verification = () => {
     const [rowsPerPage, setRowsPerPage] = React.useState(5)
     
     const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+        setPage(newPage)
+    }
 
     const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+        setRowsPerPage(parseInt(event.target.value, 10))
+        setPage(0)
+    }
 
     React.useEffect(() => {
         getAllData()
@@ -110,7 +110,9 @@ const Verification = () => {
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                        {literatures.map((item, i) => {
+                        {literatures
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map((item, i) => {
                             let statusStyle = ''
                             switch (item.status) {
                                 case 'Waiting to be verified':
@@ -132,6 +134,7 @@ const Verification = () => {
                             
                             return (
                                 <TableRow
+                                    hover
                                     key={i}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
