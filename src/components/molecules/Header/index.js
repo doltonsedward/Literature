@@ -6,9 +6,21 @@ import { logo } from '../../../assets'
 
 // import store
 import store from '../../../store'
-import { pushNotif } from '../../../utils'
+import { dropDown, pushNotif } from '../../../utils'
 
-const Header = () => {
+// MUI component
+import { 
+    Paper,
+    List,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText
+} from '@mui/material';
+
+// MUI icon
+import LogoutIcon from '@mui/icons-material/Logout';
+
+const Header = ({ role, activeIn }) => {
     const history = useHistory()
     const currentPath = history.location.pathname
 
@@ -22,7 +34,7 @@ const Header = () => {
         pushNotif({
             title: 'You logout successfully',
             message: 'Welcome back if you want'
-        })
+        }, 'success')
     }
 
     const handleLogout = () => {
@@ -43,17 +55,44 @@ const Header = () => {
 
     return (
         <header className="header">
-            <nav>
-                <ul >
-                    <li className={currentPath === '/profile' ? 'active' : ''}><Link style={linkStyle} to="/profile">Profile</Link></li>
-                    <li className={currentPath === '/collection' ? 'active' : ''}><Link style={linkStyle} to="/collection">My Collection</Link></li>
-                    <li className={currentPath === '/add-literature' ? 'active' : ''}><Link style={linkStyle} to="/add-literature">Add Literature</Link></li>
-                    <li onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</li>
-                </ul>
-            </nav>
-            <Link to="/">
-                <img src={logo} alt="This is literature" />
-            </Link>
+            {
+                role === 'admin' ?
+                <>
+                    <Link to="/">
+                        <img src={logo} alt="This is literature" />
+                    </Link>
+                    <nav>
+                        <img className="profile-image" onClick={dropDown} src={currentState.user.avatar} alt="Click to use dropdown" />
+                        <Paper className="dropdown">
+                            <List
+                                component="div"
+                                aria-labelledby="nested-list-subheader"
+                                >
+                                <ListItemButton onClick={handleLogout}>
+                                    <ListItemIcon>
+                                        <LogoutIcon sx={{color: 'var(--secondary)'}} />
+                                    </ListItemIcon>
+                                    <ListItemText sx={{ color: 'var(--primary)' }} primary="Logout" />
+                                </ListItemButton>
+                            </List>
+                        </Paper>
+                    </nav>
+                </>
+                :
+                <>
+                    <nav>
+                        <ul>
+                            <li className={activeIn === 'profile' ? 'active' : ''}><Link style={linkStyle} to="/profile">Profile</Link></li>
+                            <li className={activeIn === 'collection' ? 'active' : ''}><Link style={linkStyle} to="/collection">My Collection</Link></li>
+                            <li className={activeIn === 'add-literature' ? 'active' : ''}><Link style={linkStyle} to="/add-literature">Add Literature</Link></li>
+                            <li onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</li>
+                        </ul>
+                    </nav>
+                    <Link to="/">
+                        <img src={logo} alt="This is literature" />
+                    </Link>
+                </>
+            }
         </header>
     )
 }

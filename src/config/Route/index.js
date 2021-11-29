@@ -12,13 +12,13 @@ const UserLoginRoute = ({ ...rest }) => {
     )
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ ...rest }) => {
     const user = useSelector(state => state.user)
-    const getAccess = user.role === 'admin' ? true : false
+    const getAccess = user?.role === 'admin' ? true : false
     return (
         <>
             {/* need watched */}
-            <Route {...rest} render={(props) => (getAccess ? <Component {...props} /> : <Redirect to="/" />)} />
+            {getAccess ? <Route {...rest} /> : <Redirect to="/" />}
             {/* props have history, location, match, staticContext */}
         </>
     )

@@ -5,8 +5,8 @@ const checkUser = async () => {
     try {
         const response = await API.get('/check-auth')
 
-        if (response.status === 404) {
-            return store.dispatch({
+        if (response.status !== 200) {
+            store.dispatch({
                 type: "AUTH_ERROR",
             })
         }
@@ -16,11 +16,16 @@ const checkUser = async () => {
         payload.token = localStorage.token;
 
         store.dispatch({
-            type: "USER_SUCCESS",
+            type: "AUTH_SUCCESS",
             payload,
           });
     } catch (error) {
-        console.log(error)
+        const times = Math.floor(Math.random() * 4000 + 100)
+        setTimeout(() => {
+            store.dispatch({
+                type: "AUTH_ERROR",
+            })
+        }, times);
     }
 }
 

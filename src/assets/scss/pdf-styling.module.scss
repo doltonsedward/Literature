@@ -1,0 +1,12 @@
+/* pdf reader */
+.pdfreader {
+    height: 270px !important;
+    overflow: hidden;
+
+    canvas {
+        width: 200px !important;
+        height: 270px !important;
+        border-radius: var(--border-trendy);
+    }
+}
+/* close */

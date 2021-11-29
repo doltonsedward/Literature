@@ -1,6 +1,7 @@
 import { checkUser } from "./config"
 
 const initialValue = {
+    isLoading: true,
     isLogin: false,
     user: {}
 }
@@ -9,11 +10,12 @@ const rootReducer = (state = initialValue, action) => {
     const { type, payload } = action
 
     switch (type) {
-        case 'USER_SUCCESS':
+        case 'AUTH_SUCCESS':
         case 'LOGIN':
             localStorage.setItem('token', payload.token)
             
             return {
+                isLoading: false,
                 isLogin: true,
                 user: payload
             }
@@ -23,20 +25,9 @@ const rootReducer = (state = initialValue, action) => {
             localStorage.removeItem('token')
             
             return {
+                isLoading: false,
                 isLogin: false,
-                user: payload
-            }
-
-        case 'REGISTER':
-            return {
-                isLogin: false,
-                user: payload
-            }
-
-        case 'IS_CHANGGING':
-            return {
-                ...state,
-                isChangging: payload
+                user: null
             }
         default:
             return state

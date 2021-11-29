@@ -2,14 +2,19 @@
     outline: none;
 }
 
-/* change behavior of react push notification */
-.rpn-notification-holder.top-middle {
-    left: 20px !important;
-    transform: none !important;
+.no-drop { cursor: no-drop }
+
+.blank-image {
+    text-align: center;
 }
 
-/* .rpn-notification-card {
-    
-} */
+.blank-image img {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.blank-image p {
+    font-size: 20px
+}
 
 input { font-size: 16px }

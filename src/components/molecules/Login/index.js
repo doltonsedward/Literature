@@ -1,7 +1,11 @@
 import './_Login.scss'
+import { useHistory } from 'react-router';
 import { Gap, Input } from '../..';
 import { muiWhiteButton, pushNotif } from '../../../utils';
 import store from '../../../store';
+
+// oauth
+import GoogleLogin from 'react-google-login'
 
 // MUI component
 import * as React from 'react';
@@ -21,9 +25,10 @@ import {
 import { API } from '../../../config/API'
 
 const Login = ({ isOpen, setIsOpen }) => {
+    const history = useHistory()
     const [open, setOpen] = React.useState(false)
     const [message, setMessage] = React.useState('Loading..')
-    const [severity, setSeverity] = React.useState('success')
+    const [severity, setSeverity] = React.useState('info')
 
     const [form, setForm] = React.useState({
         email: "",
@@ -62,9 +67,11 @@ const Login = ({ isOpen, setIsOpen }) => {
 
                 pushNotif({
                     title: 'Login successfully',
-                    message: 'Welcome back user'
-                })
+                    message: 'Welcome user'
+                }, 'success')
             } 
+
+            history.push('/')
             
         } catch (error) {
             const message = error?.response?.data.message || error?.response?.data?.error.message
@@ -108,6 +115,10 @@ const Login = ({ isOpen, setIsOpen }) => {
         height: 50
     }
 
+    const responseGoogle = (response) => {
+        console.log(response)
+    }
+
     return (
         <div>
             <Modal
@@ -131,6 +142,16 @@ const Login = ({ isOpen, setIsOpen }) => {
                             <Input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Password" />
                             <Gap height={36} />
                             <Button variant="contained" sx={submitBtn} onClick={loginSession}>sign in</Button>
+
+                            {/* oauth session */}
+                            <div>
+                                <GoogleLogin 
+                                    clientId="1076583809766-f70m00reofepf768mcmue39qrm7gbch6.apps.googleusercontent.com"
+                                    buttonText="Login"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                />
+                            </div>
                         </Box>
                     </Box>
                 </Fade>

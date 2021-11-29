@@ -1,8 +1,32 @@
 .collection {
+    .header-collection {
+        display: flex;
+        justify-content: space-between;
+    }
+    
     .list-collection {
+        display: flex;
+        flex-wrap: wrap;
+        
         li {
             width: 200px;
-            overflow: hidden;
+            margin-right: 80px;
+            margin-bottom: 40px;
+            position: relative;
+
+            .title-literature {
+                height: 58px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .action-button {
+                display: none;
+                margin-top: 10px;
+                width: 100%;
+
+                &.active { display: block }
+            }
         }
         
         .footer {
