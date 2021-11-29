@@ -1,6 +1,6 @@
 import './_Profile.scss'
 import { BoxProfle, Gap, Header, ProfileFAQ } from '../../components'
-import { API, checkUser } from '../../config'
+import { API } from '../../config'
 import { muiWhiteButton, pushNotif, saveProfile } from '../../utils'
 import { imgBlank, pdfStyle } from '../../assets'
 import { useState } from 'react'
