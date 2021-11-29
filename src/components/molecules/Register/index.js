@@ -8,16 +8,10 @@ import {
     Box,
     Fade,
     Button,
-    Snackbar,
-    IconButton,
-    Alert
 } from '@mui/material';
 
-import { Gap, Input } from '../..'
-import { muiRedButton } from '../../../utils'
-
-// import API
-import { API } from '../../../config/API'
+import { Gap, Input, GoogleLoginBtn, MuiAlert } from '../..'
+import { registerStyle, handleChange, registerSession } from '../../../utils'
 
 const Register = ({ isOpen, setIsOpen }) => {
     const [open, setOpen] = React.useState(false)
@@ -33,73 +27,11 @@ const Register = ({ isOpen, setIsOpen }) => {
         address: ""
     })
 
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const registerSession = async () => {
-        setOpen(true)
-        try {
-            const config = {
-                headers: {
-                    "Content-type": "application/json",
-                }
-            }
-
-            const body = JSON.stringify(form)
-
-            const response = await API.post('/register', body, config)
-
-            if (response?.status === 200) {
-                setMessage('Register Success')
-                setSeverity('success')
-            } 
-        } catch (error) {
-            const messageError = error?.response?.data?.error?.message || error.response.data.message
-            setMessage(messageError)
-            setSeverity('error')
-        }
-    }
-
-    const handleCloseRegister = () => setOpen(false)
-    
-    const handleClose = () => setIsOpen(false)
-
-    // mui logic
-    const action = (
-        <>
-            <Button color="secondary" size="small" onClick={handleClose}>
-                CLOSE
-            </Button>
-            <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-            >
-            </IconButton>
-        </>
-    )
-
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'var(--primary)',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-    };
-
-    const submitBtn = {
-        ...muiRedButton,
-        width: '100%', 
-        height: 50
+    const handler = {
+        handleRegister: ()=> registerSession(form, setOpen, setMessage, setSeverity),
+        handleCloseRegister: ()=> setOpen(false),
+        handleClose: ()=> setIsOpen(false),
+        onInputChange: (e) => handleChange(e, form, setForm)
     }
 
     return (
@@ -108,7 +40,8 @@ const Register = ({ isOpen, setIsOpen }) => {
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 open={isOpen}
-                onClose={handleClose}
+                onClose={handler.handleClose}
+                disableScrollLock={true}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
@@ -116,42 +49,37 @@ const Register = ({ isOpen, setIsOpen }) => {
                 }}
             >
                 <Fade in={isOpen}>
-                    <Box sx={style}>
+                    <Box sx={registerStyle.wrapper}>
                         <Box sx={{ padding: '41px 33px 37px', borderRadius: '5px' }}>
                             <Typography variant="h2" component="div">Sign up</Typography>
                             <Gap height={29} />
-                            <Input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email" />
+                            <Input type="email" name="email" value={form.email} onChange={handler.onInputChange} placeholder="Email" />
                             <Gap height={20} />
-                            <Input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Password" />
+                            <Input type="password" name="password" value={form.password} onChange={handler.onInputChange} placeholder="Password" />
                             <Gap height={20} />
-                            <Input name="fullName" value={form.fullName} onChange={handleChange} placeholder="Full Name" />
+                            <Input name="fullName" value={form.fullName} onChange={handler.onInputChange} placeholder="Full Name" />
                             <Gap height={20} />
-                            <Input name="gender" value={form.gender} onChange={handleChange} placeholder="Gender" />
+                            <Input name="gender" value={form.gender} onChange={handler.onInputChange} placeholder="Gender" />
                             <Gap height={20} />
-                            <Input name="phone" value={form.phone} onChange={handleChange} placeholder="Phone" />
+                            <Input name="phone" value={form.phone} onChange={handler.onInputChange} placeholder="Phone" />
                             <Gap height={20} />
-                            <Input name="address" value={form.address} onChange={handleChange} variant="field" placeholder="Address" />
+                            <Input name="address" value={form.address} onChange={handler.onInputChange} variant="field" placeholder="Address" />
                             <Gap height={36} />
-                            <Button variant="contained" sx={submitBtn} onClick={registerSession}>Sign up</Button>
+                            <Button variant="contained" sx={registerStyle.submitBtn} onClick={handler.handleRegister}>Sign up</Button>
+                            <Typography variant="subtitle1" component="p" style={registerStyle.textStyles}>or</Typography>
+                            <GoogleLoginBtn setMessage={setMessage} setSeverity={setSeverity} />
                         </Box>
                     </Box>
                 </Fade>
             </Modal>
-            <Snackbar sx={{
-                position: 'fixed',
-                bottom: 0,
-                zIndex: 99999999999,
-                transform: 'translate(50px, -25px) scale(1.2)'
-            }}
-                open={open}
-                autoHideDuration={6000}
-                onClose={handleCloseRegister}
-                action={action}
-            >
-                <Alert onClose={handleCloseRegister} severity={severity} sx={{ width: '100%' }}>
-                    {message}
-                </Alert>
-            </Snackbar>
+
+            <MuiAlert 
+                open={open} 
+                severity={severity} 
+                message={message} 
+                closeButton={handler.handleClose}
+                closeAlert={handler.handleCloseRegister}
+            />
         </div>
     )
 }
