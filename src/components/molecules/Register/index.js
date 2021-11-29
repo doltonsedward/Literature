@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import store from '../../../store';
+import React, { useState } from 'react'
 
 // MUI component
 import { 
@@ -14,14 +13,13 @@ import {
     Alert
 } from '@mui/material';
 
-import { Gap, Input } from '../..';
-import { muiRedButton } from '../../../utils';
+import { Gap, Input } from '../..'
+import { muiRedButton } from '../../../utils'
 
 // import API
 import { API } from '../../../config/API'
 
 const Register = ({ isOpen, setIsOpen }) => {
-    console.clear()
     const [open, setOpen] = React.useState(false)
     const [message, setMessage] = React.useState('Loading..')
     const [severity, setSeverity] = React.useState('info')
@@ -56,7 +54,6 @@ const Register = ({ isOpen, setIsOpen }) => {
             const response = await API.post('/register', body, config)
 
             if (response?.status === 200) {
-
                 setMessage('Register Success')
                 setSeverity('success')
             } 
