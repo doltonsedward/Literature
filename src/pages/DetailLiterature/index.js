@@ -17,8 +17,10 @@ import {
     Button, 
     Typography 
 } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 const DetailLiterature = () => {
+    const currentState = useSelector(state => state)
     const { literature_id } = useParams()
 
     const [numPages, setNumPages] = useState(null);
@@ -69,11 +71,7 @@ const DetailLiterature = () => {
                     message: `${literature.title} remove from collection`
                 }, status)
             } else {
-                const body = {
-                    name: 'Things to do'
-                }
-
-                await API.post('/collection/' + literature_id, body)
+                await API.post('/collection/' + literature_id)
                 getCollection()
                 
                 return pushNotif({
@@ -122,6 +120,15 @@ const DetailLiterature = () => {
         getLiterature()
         getCollection()
     }, [])
+
+    const buttonAuthor = {
+        color: 'lightblue',
+        border: '1px solid lightblue',
+        '&:hover': {
+            border: '1px solid lightblue',
+            opacity: '.7'
+        }
+    }
     
     return (
         <>
@@ -187,15 +194,22 @@ const DetailLiterature = () => {
                     </ul>
                 </div>
                 <div className="section-two">
-                    <Button variant="contained" onClick={handleCollection}>
-                        {
-                            collection ?
-                            <p>remove from collection <BookmarkRemoveIcon className="icon" /></p>
-                            :
-                            <p>add to collection <img src={iconCollection} className="icon" alt="add to your collection" /></p>
-                        } 
-                        
-                    </Button>
+                    {
+                        literature.ownerLiterature?.fullName !== currentState.user.fullName ?
+                        <Button variant="contained" onClick={handleCollection}>
+                            {
+                                collection ?
+                                <p>remove from collection <BookmarkRemoveIcon className="icon" /></p>
+                                : 
+                                <p>add to collection <img src={iconCollection} className="icon" alt="add to your collection" /></p>
+                            } 
+                            
+                        </Button>
+                        : 
+                        <Button variant="outlined" sx={buttonAuthor}>
+                            <p>you are the author</p>
+                        </Button>
+                    }
                 </div>
             </div>
         </>
