@@ -11,12 +11,13 @@ import iconPhone from './icon/phone.svg'
 import iconFile from './icon/file.svg'
 import iconDownload from './icon/download.svg'
 import iconCollection from './icon/collection.svg'
+import iconGoogle from './icon/google.png'
 
 import imgBlank from './img/blank.svg'
 
 import pdfStyle from './scss/pdf-styling.module.scss'
 
 export { logo, coverImg, iconSearch }
-export { iconEmail, iconGender, iconLocation, iconPhone, iconFile, iconDownload, iconCollection }
+export { iconEmail, iconGender, iconLocation, iconPhone, iconFile, iconDownload, iconCollection, iconGoogle }
 export { imgBlank }
 export { pdfStyle }
