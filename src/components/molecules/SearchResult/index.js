@@ -16,8 +16,6 @@ import { Button, Typography } from '@mui/material'
 
 const SearchResult = ({ searchKey }) => {
     const [dataLiterature, setDataLiterature] = useState([])
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
     const [inputData, setInputData] = useState({
         title: !searchKey ? '' : searchKey.title,
         public_year: ""
@@ -45,12 +43,7 @@ const SearchResult = ({ searchKey }) => {
         })
     }
 
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-    }
-
     const handleSubmit = () => {
-        localStorage.setItem("search", JSON.stringify(inputData))
         getLiterature()
     }
 
@@ -99,7 +92,6 @@ const SearchResult = ({ searchKey }) => {
                                         <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
                                             <Document
                                                 file={item.attache}
-                                                onLoadSuccess={onDocumentLoadSuccess}
                                                 className={pdfStyle.pdfreader}
                                                 loading="Wait.."
                                             >

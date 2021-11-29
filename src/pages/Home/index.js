@@ -5,7 +5,6 @@ import { Input, Gap, Header, SearchResult } from '../../components'
 
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router'
 import { pushNotif } from '../../utils';
 
 // import API
@@ -16,7 +15,6 @@ import { Button } from '@mui/material'
 
 const Home = () => {
     const currentState = useSelector(state => state)
-    const history = useHistory()
 
     const [dataLiterature, setDataLiterature] = useState([])
     const [isSearchActive, setIsSearchActive] = useState(false)

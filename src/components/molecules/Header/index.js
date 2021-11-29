@@ -22,7 +22,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 const Header = ({ role, activeIn }) => {
     const history = useHistory()
-    const currentPath = history.location.pathname
 
     const currentState = useSelector(state => state)
     const linkStyle = {

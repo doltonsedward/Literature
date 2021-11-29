@@ -37,8 +37,6 @@ const InputField = ({...rest}) => {
 }
 
 const Input = ({label, variant, onClick, ...rest}) => {
-    let classForLabel = 'input-section'
-
     switch (variant) {
 
         case 'file':
