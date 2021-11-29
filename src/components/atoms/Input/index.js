@@ -31,7 +31,7 @@ const InputBasic = ({...rest}) => {
 const InputField = ({...rest}) => {
     return (
         <label className="wrapper-input default">
-            <textarea {...rest} />
+            <textarea style={{ height: 80 }} {...rest} />
         </label>
     )
 }
