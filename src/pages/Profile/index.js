@@ -1,7 +1,7 @@
 import './_Profile.scss'
 import { BoxProfle, Gap, Header, ProfileFAQ } from '../../components'
 import { API, checkUser } from '../../config'
-import { muiWhiteButton, pushNotif } from '../../utils'
+import { muiWhiteButton, pushNotif, saveProfile } from '../../utils'
 import { imgBlank, pdfStyle } from '../../assets'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -46,78 +46,15 @@ const Profile = () => {
             })
         }
     }
-
-    // MUI logic
-    const handleClickOpen = () => {
-        setOpenModal(true);
-    };
-
-    const handleClose = () => {
-        setOpenModal(false);
-    };
-    // close 
-
+    
     useEffect(()=> {
         getOwnerLiterature()
     }, [])
-
-    const handleSubmit = async () => {
-        try {
-            if (typeof form.avatar === 'object') {
-                const formData = new FormData()
-                formData.set('email', form.email)
-                formData.set('phone', form.phone)
-                formData.set('gender', form.gender)
-                formData.set('address', form.address)
-                formData.set('avatar', form.avatar[0], form.avatar[0].filename)
     
-                const config = {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                }
-    
-                const body = formData
-    
-                const response = await API.patch('/user', body, config)
-    
-                pushNotif({
-                    title: response?.data.status,
-                    message: response?.data.message
-                }, 'success')
-            } else {
-                const config = {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }
-    
-                const body = form
-    
-                const response = await API.patch('/user/specific', body, config)
-    
-                pushNotif({
-                    title: response?.data.status,
-                    message: response?.data.message
-                }, 'success')
-            }
-
-            checkUser()
-            setEditable(!editable)
-        } catch (error) {
-            console.log(error)
-            if (!editable) {
-                return pushNotif({
-                    title: "Error",
-                    message: "Click the edit button first"
-                })
-            }
-
-            pushNotif({
-                title: "Error",
-                message: "You must upload photo first"
-            })
-        }
+    const handler = {
+        handleSaveProfile: ()=> saveProfile(form, editable, setEditable),
+        handleClickOpen: ()=> setOpenModal(true),
+        handleClose: ()=> setOpenModal(false),
     }
 
     // styling
@@ -134,8 +71,8 @@ const Profile = () => {
 
                 <div className="wrapper-action-button">
                     <Button variant="contained" sx={newMuiRedButton} onClick={()=> setEditable(!editable)}>edit</Button>
-                    <Button variant="contained" sx={muiWhiteButton} onClick={handleSubmit}>save</Button>
-                    <HelpOutlineIcon sx={{ marginLeft: 1, cursor: 'pointer' }} onClick={handleClickOpen} />
+                    <Button variant="contained" sx={muiWhiteButton} onClick={handler.handleSaveProfile}>save</Button>
+                    <HelpOutlineIcon sx={{ marginLeft: 1, cursor: 'pointer' }} onClick={handler.handleClickOpen} />
                 </div>
                 <BoxProfle editable={editable} form={form} preview={preview} setForm={setForm} setPreview={setPreview} />
                 <Gap height={61} />
@@ -174,7 +111,7 @@ const Profile = () => {
                     </div>
                 }
 
-                <ProfileFAQ openModal={openModal} handleClose={handleClose} />
+                <ProfileFAQ openModal={openModal} handleClose={handler.handleClose} />
                 <Gap height={75} />
             </div>
         </>
