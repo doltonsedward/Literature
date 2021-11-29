@@ -5,7 +5,7 @@ import { muiWhiteButton, pushNotif } from '../../../utils';
 import store from '../../../store';
 
 // oauth
-// import GoogleLogin from 'react-google-login'
+import GoogleLogin from 'react-google-login'
 
 // MUI component
 import * as React from 'react';
@@ -144,14 +144,14 @@ const Login = ({ isOpen, setIsOpen }) => {
                             <Button variant="contained" sx={submitBtn} onClick={loginSession}>sign in</Button>
 
                             {/* oauth session */}
-                            {/* <div>
+                            <div>
                                 <GoogleLogin 
                                     clientId="1076583809766-f70m00reofepf768mcmue39qrm7gbch6.apps.googleusercontent.com"
                                     buttonText="Login"
                                     onSuccess={responseGoogle}
                                     onFailure={responseGoogle}
                                 />
-                            </div> */}
+                            </div>
                         </Box>
                     </Box>
                 </Fade>
