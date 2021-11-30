@@ -1,6 +1,7 @@
 :root {
     --white: #ffffff;
     --low-white: #d1d1d1;
+    --smooth-white: #F9F9F9;
     --second-white: #BCBCBC;
     --gray: #929292;
     --soft-black: #161616;
@@ -23,6 +24,9 @@
     --waiting: var(--yellow);
     
     --text-color-primary: var(--white);
+
+    /* background section */
+    --bg-admin: var(--smooth-white);
 
     
     /* input section */
