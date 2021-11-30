@@ -1,9 +1,10 @@
 import './_Profile.scss'
 import { BoxProfle, Gap, Header, ProfileFAQ, TabsProfile } from '../../components'
 import { API } from '../../config'
-import { muiWhiteButton, pushNotif, saveProfile } from '../../utils'
+import { muiWhiteButton, saveProfile } from '../../utils'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 // MUI component
 import React, { useEffect } from 'react'
@@ -37,12 +38,8 @@ const Profile = () => {
             
             setOwnerLiterature(response?.data.literatures)
         } catch (error) {
-            const status = error?.response?.data.status
-            const message = error?.response?.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
     
@@ -76,7 +73,9 @@ const Profile = () => {
 
                 <Typography variant="h1" component="h1" className="heading">My Literature</Typography>
                 <Gap height={41} />
-                
+                <Typography variant="subtitle1" component="p">
+                    Total {ownerLiterature.length} all literature
+                </Typography>
                 <TabsProfile data={ownerLiterature} />
 
                 <ProfileFAQ openModal={openModal} handleClose={handler.handleClose} />

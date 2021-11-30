@@ -1,12 +1,13 @@
 import './_Header.scss'
+import { logo } from '../../../assets'
+import { dropDown } from '../../../utils'
+import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router'
 import { useSelector } from 'react-redux'
-import { logo } from '../../../assets'
 
 // import store
 import store from '../../../store'
-import { dropDown, pushNotif } from '../../../utils'
 
 // MUI component
 import { 
@@ -29,18 +30,11 @@ const Header = ({ role, activeIn }) => {
         color: 'var(--color-third)'
     }
 
-    const notification = () => {
-        pushNotif({
-            title: 'You logout successfully',
-            message: 'Welcome back if you want'
-        }, 'success')
-    }
-
     const handleLogout = () => {
         const email = currentState.user.email
         const password = currentState.user.password
 
-        notification()
+        toast.success("Logout success")
         store.dispatch({
             type: 'LOGOUT',
             payload: {

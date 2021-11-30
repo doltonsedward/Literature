@@ -1,4 +1,4 @@
-import { pushNotif } from ".."
+import { toast } from 'react-toastify'
 
 const downloadPDF = async (fileURL, filename) => {
     try {
@@ -27,10 +27,8 @@ const downloadPDF = async (fileURL, filename) => {
         link.parentNode.removeChild(link)
     } catch (error) {
         // push notif when error
-        pushNotif({
-            title: 'Error',
-            message: 'Cannot download file'
-        })
+        const message = error.response.data.message || 'Cannot download file'
+        toast.error(message)
     }
 }
 

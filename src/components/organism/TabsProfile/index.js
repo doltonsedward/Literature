@@ -17,15 +17,15 @@ const TabsProfile = ({ data }) => {
             'aria-controls': `simple-tabpanel-${index}`,
         };
     }
-
-    // mui function
-    const handleMuiChange = (event, newValue) => {
-        setValue(newValue);
-    }
     
     const filterWaiting = data.filter(item => item.status === 'Waiting')
     const filterApproval = data.filter(item => item.status === 'Approve')
     const filterCancel = data.filter(item => item.status === 'Cancel')
+
+    // mui function
+    const handleMuiChange = (event, newValue) => {
+        setValue(newValue)
+    }
     
     return (
         <Box className="tabs-profile">
@@ -43,13 +43,13 @@ const TabsProfile = ({ data }) => {
                 }
             </TabPanel>
             <TabPanel value={value} index={1}>
-            {
+                {
                     data.length && filterApproval.length ?
                     <ListOwnerLiterature data={filterApproval} /> : <BlankImage />
                 }
             </TabPanel>
             <TabPanel value={value} index={2}>
-            {
+                {
                     data.length && filterCancel.length ?
                     <ListOwnerLiterature data={filterCancel} /> : <BlankImage />
                 }

@@ -1,10 +1,11 @@
 import './DetailLiterature.scss'
 import { API } from '../../config/API'
-import { downloadPDF, pushNotif } from '../../utils'
+import { downloadPDF } from '../../utils'
 import { iconCollection, iconDownload } from '../../assets'
 import { Header } from '../../components'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import { toast } from 'react-toastify'
 
 // PDF render
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
@@ -28,18 +29,14 @@ const DetailLiterature = () => {
     const [collection, setCollection] = useState({})
     const [literature, setLiterature] = useState({})
 
-    const getLiterature = async (req, res) => {
+    const getLiterature = async () => {
         try {
             const response = await API.get('/literature/' + literature_id)
 
             setLiterature(response.data.literature)
         } catch (error) {
-            const status = error.response.data.status
-            const message = error.response.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 
@@ -49,42 +46,27 @@ const DetailLiterature = () => {
 
             setCollection(response.data.literature)
         } catch (error) {
-            const status = error.response.data.status
-            const message = error.response.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 
     const handleCollection = async () => {
         try {
-            const status = 'Success'
-
             if (collection) {
                 await API.delete('/collection/' + collection.id)
                 getCollection()
                 
-                return pushNotif({
-                    title: status,
-                    message: `${literature.title} remove from collection`
-                }, status)
+                toast.success(`${literature.title} remove from collection`)
             } else {
                 await API.post('/collection/' + literature_id)
                 getCollection()
                 
-                return pushNotif({
-                    title: status,
-                    message: `${literature.title} add to collection`
-                }, status)
+                toast.success(`${literature.title} add to collection`)
             }
             
         } catch (error) {
-            pushNotif({
-                title: 'Error',
-                message: 'Unknow error'
-            })
+            toast.error("Unknow error")
         }
     }
 
@@ -109,11 +91,7 @@ const DetailLiterature = () => {
 
     const download = () => {
         downloadPDF(literature.attache, String(literature.title))
-        const status = 'Success'
-        pushNotif({
-            title: status,
-            message: 'Download literature finished',
-        }, status)
+        toast.success("Download literature finished")
     }
 
     useEffect(() => {

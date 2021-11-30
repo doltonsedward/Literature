@@ -5,7 +5,7 @@ import { Input, Gap, Header, SearchResult } from '../../components'
 
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { pushNotif } from '../../utils';
+import { toast } from 'react-toastify'
 
 // import API
 import { API, checkUser, setAuthToken } from '../../config'
@@ -28,12 +28,8 @@ const Home = () => {
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
-            const status = error?.response?.data.status
-            const message = error?.response?.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error?.response?.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 import './assets/css/root.css'
+import { ToastContainer } from 'react-toastify';
 import App from './pages/App';
 import store from './store'
 import { Provider } from "react-redux";
@@ -43,6 +45,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
+        <ToastContainer position="top-right" />
         <Notifications position="top-right" />
         <App />
       </ThemeProvider>

@@ -4,6 +4,7 @@ import { BlankImage, Gap, Header, LoadingPDF } from '../../components'
 import { pushNotif } from "../../utils"
 import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 
 // import API
@@ -24,31 +25,20 @@ const MyCollection = () => {
             const response = await API.get('/collection')
             setCollection(response?.data.collection)
         } catch (error) {
-            const status = error.response?.data.status
-            const message = error.response?.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 
     const handleRemoveCollection = async (literatureName, collectionId) => {
         try {
-            const status = 'Success'
             await API.delete('/collection/' + collectionId)
             getCollection()
-            
-            pushNotif({
-                title: status,
-                message: `${literatureName} remove from collection`
-            }, status)    
+
+            toast.success(`${literatureName} remove from collection`)
         } catch (error) {
-            const message = error?.response?.data.message
-            pushNotif({
-                title: 'Error',
-                message
-            }, 'error')  
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 

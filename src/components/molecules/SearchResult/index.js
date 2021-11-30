@@ -5,7 +5,7 @@ import { Gap, Input, Header, LoadingPDF } from '../..'
 import { pushNotif } from '../../../utils'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-
+import { toast } from 'react-toastify'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 
 // import API
@@ -27,12 +27,8 @@ const SearchResult = ({ searchKey }) => {
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
-            const status = error.response?.data.status
-            const message = error.response?.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error.response?.data?.message || 'Unknow error'
+            toast.error(message)
         }
     }
 

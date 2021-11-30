@@ -1,7 +1,8 @@
 import { API } from "../../../config"
 import store from "../../../store"
-import { muiWhiteButton, pushNotif, randomPass } from "../../../utils"
+import { muiWhiteButton, randomPass } from "../../../utils"
 import { iconGoogle } from "../../../assets"
+import { toast } from 'react-toastify'
 
 import { Button } from '@mui/material'
 
@@ -32,10 +33,7 @@ const GoogleLoginBtn = ({ setMessage, setSeverity }) => {
                     payload: responseAuth.data.user
                 })    
 
-                pushNotif({
-                    title: 'Login successfully',
-                    message: 'Welcome user'
-                }, 'success')
+                toast.success('Welcome user')
             } 
 
         } catch (error) {

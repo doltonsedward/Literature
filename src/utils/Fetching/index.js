@@ -1,8 +1,8 @@
+import { toast } from 'react-toastify'
+import store from "../../store"
+
 // import API
 import { API, checkUser } from "../../config"
-
-import { pushNotif } from ".."
-import store from "../../store"
 
 const registerSession = async (data, setOpen, setMessage, setSeverity) => {
     setOpen(true)
@@ -19,8 +19,12 @@ const registerSession = async (data, setOpen, setMessage, setSeverity) => {
         const response = await API.post('/register', body, config)
 
         if (response?.status === 200) {
-            setMessage('Register Success')
-            setSeverity('success')
+            store.dispatch({ 
+                type: 'LOGIN', 
+                payload: response.data.user
+            }) 
+            
+            toast.success("Login success, Welcome " + response?.data?.user.fullName)
         } 
     } catch (error) {
         const messageError = error?.response?.data?.error?.message || error.response.data.message
@@ -53,10 +57,7 @@ const loginSession = async (data, setOpen, setMessage, setSeverity, setLoading) 
                     payload: response.data.user
                 })    
 
-                pushNotif({
-                    title: 'Login successfully',
-                    message: 'Welcome to literature'
-                }, 'success')
+                toast.success("Login success, Welcome " + response?.data?.user.fullName)
             }, 1000)
         } 
         
@@ -74,6 +75,8 @@ const loginSession = async (data, setOpen, setMessage, setSeverity, setLoading) 
 
 const saveProfile = async (form, editable, setEditable) => {
     try {
+        if (!editable) return toast.error("Click the edit button first")
+
         if (typeof form.avatar === 'object') {
             const formData = new FormData()
             formData.set('email', form.email)
@@ -92,10 +95,7 @@ const saveProfile = async (form, editable, setEditable) => {
 
             const response = await API.patch('/user', body, config)
 
-            pushNotif({
-                title: response?.data.status,
-                message: response?.data.message
-            }, 'success')
+            toast.success(response?.data.message)
         } else {
             const config = {
                 headers: {
@@ -107,27 +107,13 @@ const saveProfile = async (form, editable, setEditable) => {
 
             const response = await API.patch('/user/specific', body, config)
 
-            pushNotif({
-                title: response?.data.status,
-                message: response?.data.message
-            }, 'success')
+            toast.success(response?.data.message)
         }
 
         checkUser()
         setEditable(!editable)
     } catch (error) {
-        console.log(error)
-        if (!editable) {
-            return pushNotif({
-                title: "Error",
-                message: "Click the edit button first"
-            })
-        }
-
-        pushNotif({
-            title: "Error",
-            message: "You must upload photo first"
-        })
+        toast.error("You must upload photo first")
     }
 }
 

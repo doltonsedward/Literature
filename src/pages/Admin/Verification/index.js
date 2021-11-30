@@ -1,7 +1,8 @@
 import './Verification.scss'
 
 import { Gap, Header } from "../../../components"
-import { muiButtonApprove, muiButtonCancel, pushNotif } from '../../../utils';
+import { muiButtonApprove, muiButtonCancel } from '../../../utils'
+import { toast } from 'react-toastify'
 
 // import API
 import { API } from '../../../config';
@@ -32,10 +33,8 @@ const Verification = () => {
             const response = await API.get('/literatures/admin')
             setLiteratures(response.data.literatures)
         } catch (error) {
-            pushNotif({
-                title: 'Error',
-                message: 'Unknow error'
-            })
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 
@@ -50,19 +49,13 @@ const Verification = () => {
             const body = { status: actionName }
 
             const response = await API.patch('/literature/' + literatureId, body, config)
-            pushNotif({
-                title: response?.data?.status,
-                message: response?.data?.message
-            })
+            const { message } = response.data || 'Success change data'
+            toast.success(message)
 
             getAllData()
         } catch (error) {
-            const status = error?.response?.data.status
             const { message } = error?.response?.data
-            pushNotif({
-                title: status,
-                message
-            })
+            toast.error(message)
         }
     } 
 

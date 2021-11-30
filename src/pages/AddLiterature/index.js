@@ -1,10 +1,11 @@
 import './AddLiterature.scss'
 import { Input, Gap, Header } from '../../components'
 import { pdfStyle } from '../../assets'
-import { pushNotif, handleAnyChange, muiButtonApprove } from '../../utils'
+import { pushNotif, handleAnyChange } from '../../utils'
 import { API } from '../../config'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 
 // MUI component
@@ -62,17 +63,11 @@ const AddLiterature = () => {
             
             const response = await API.post('/literature', body, config)
 
-            pushNotif({
-                title: response?.data.status,
-                message: response?.data.message
-            }, 'success')
+            toast.success(response.data.message || 'Add literature finished')
         } catch (error) {
-            const status = error?.response?.data.status
-            const message = error?.response?.data.message || error?.response?.data.error.message
-            pushNotif({
-                title: status ? status : 'Error',
-                message: message ? message : 'Unknow error'
-            })
+            const message = error.response.data.message || error.response.data.error.message
+
+            toast.error(message ? message : 'Unknow error')
         }
     }
 
