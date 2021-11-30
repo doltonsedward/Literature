@@ -33,7 +33,7 @@ const GoogleLoginBtn = ({ setMessage, setSeverity }) => {
                     payload: responseAuth.data.user
                 })    
 
-                toast.success('Welcome user')
+                toast.success('Login success, Welcome ' + responseAuth?.data?.user.fullName)
             } 
 
         } catch (error) {

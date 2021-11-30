@@ -20,7 +20,7 @@ const Profile = () => {
     const currentState = useSelector(state => state)
     const { email, phone, address, gender, avatar } = currentState?.user
 
-    const [openModal, setOpenModal] = useState(false)
+    const [openFaqModal, setOpenFaqModal] = useState(false)
     const [ownerLiterature, setOwnerLiterature] = useState([])
     const [preview, setPreview] = useState(avatar)
     const [editable, setEditable] = useState(false)
@@ -49,8 +49,8 @@ const Profile = () => {
     
     const handler = {
         handleSaveProfile: ()=> saveProfile(form, editable, setEditable),
-        handleClickOpen: ()=> setOpenModal(true),
-        handleClose: ()=> setOpenModal(false),
+        handleClickOpen: ()=> setOpenFaqModal(true),
+        handleClose: ()=> setOpenFaqModal(false),
     }
 
     // styling
@@ -78,7 +78,7 @@ const Profile = () => {
                 </Typography>
                 <TabsProfile data={ownerLiterature} />
 
-                <ProfileFAQ openModal={openModal} handleClose={handler.handleClose} />
+                <ProfileFAQ openModal={openFaqModal} handleClose={handler.handleClose} />
                 <Gap height={20} />
             </div>
         </>

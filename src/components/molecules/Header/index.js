@@ -51,9 +51,7 @@ const Header = ({ role, activeIn }) => {
             {
                 role === 'admin' ?
                 <>
-                    <Link to="/">
-                        <img src={logo} alt="This is literature" />
-                    </Link>
+                    <img src={logo} alt="This is literature" />
                     <nav>
                         <img className="profile-image" onClick={dropDown} src={currentState.user.avatar} alt="Click to use dropdown" />
                         <Paper className="dropdown">

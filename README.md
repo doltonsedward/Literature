@@ -12,6 +12,7 @@
 - Fix all bug and problem in react-pdf (done)
 - Clean up code (almost done)
 - Add google oauth client (done)
+- Make danger zone maybe
 
 ## Done Slicing UI 
 - Landing Page
