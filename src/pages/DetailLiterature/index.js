@@ -1,10 +1,11 @@
 import './DetailLiterature.scss'
 import { API } from '../../config/API'
-import { downloadPDF, pushNotif } from '../../utils'
+import { downloadPDF } from '../../utils'
 import { iconCollection, iconDownload } from '../../assets'
 import { Header } from '../../components'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import { toast } from 'react-toastify'
 
 // PDF render
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
@@ -17,8 +18,10 @@ import {
     Button, 
     Typography 
 } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 const DetailLiterature = () => {
+    const currentState = useSelector(state => state)
     const { literature_id } = useParams()
 
     const [numPages, setNumPages] = useState(null);
@@ -26,18 +29,14 @@ const DetailLiterature = () => {
     const [collection, setCollection] = useState({})
     const [literature, setLiterature] = useState({})
 
-    const getLiterature = async (req, res) => {
+    const getLiterature = async () => {
         try {
             const response = await API.get('/literature/' + literature_id)
 
             setLiterature(response.data.literature)
         } catch (error) {
-            const status = error.response.data.status
-            const message = error.response.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 
@@ -47,46 +46,27 @@ const DetailLiterature = () => {
 
             setCollection(response.data.literature)
         } catch (error) {
-            const status = error.response.data.status
-            const message = error.response.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 
     const handleCollection = async () => {
         try {
-            const status = 'Success'
-
             if (collection) {
                 await API.delete('/collection/' + collection.id)
                 getCollection()
                 
-                return pushNotif({
-                    title: status,
-                    message: `${literature.title} remove from collection`
-                }, status)
+                toast.success(`${literature.title} remove from collection`)
             } else {
-                const body = {
-                    name: 'Things to do'
-                }
-
-                await API.post('/collection/' + literature_id, body)
+                await API.post('/collection/' + literature_id)
                 getCollection()
                 
-                return pushNotif({
-                    title: status,
-                    message: `${literature.title} add to collection`
-                }, status)
+                toast.success(`${literature.title} add to collection`)
             }
             
         } catch (error) {
-            pushNotif({
-                title: 'Error',
-                message: 'Unknow error'
-            })
+            toast.error("Unknow error")
         }
     }
 
@@ -111,17 +91,22 @@ const DetailLiterature = () => {
 
     const download = () => {
         downloadPDF(literature.attache, String(literature.title))
-        const status = 'Success'
-        pushNotif({
-            title: status,
-            message: 'Download literature finished',
-        }, status)
+        toast.success("Download literature finished")
     }
 
     useEffect(() => {
         getLiterature()
         getCollection()
     }, [])
+
+    const buttonAuthor = {
+        color: 'lightblue',
+        border: '1px solid lightblue',
+        '&:hover': {
+            border: '1px solid lightblue',
+            opacity: '.7'
+        }
+    }
     
     return (
         <>
@@ -187,15 +172,22 @@ const DetailLiterature = () => {
                     </ul>
                 </div>
                 <div className="section-two">
-                    <Button variant="contained" onClick={handleCollection}>
-                        {
-                            collection ?
-                            <p>remove from collection <BookmarkRemoveIcon className="icon" /></p>
-                            :
-                            <p>add to collection <img src={iconCollection} className="icon" alt="add to your collection" /></p>
-                        } 
-                        
-                    </Button>
+                    {
+                        literature.ownerLiterature?.fullName !== currentState.user.fullName ?
+                        <Button variant="contained" onClick={handleCollection}>
+                            {
+                                collection ?
+                                <p>remove from collection <BookmarkRemoveIcon className="icon" /></p>
+                                : 
+                                <p>add to collection <img src={iconCollection} className="icon" alt="add to your collection" /></p>
+                            } 
+                            
+                        </Button>
+                        : 
+                        <Button variant="outlined" sx={buttonAuthor}>
+                            <p>you are the author</p>
+                        </Button>
+                    }
                 </div>
             </div>
         </>

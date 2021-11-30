@@ -17,4 +17,12 @@
     font-size: 20px
 }
 
+.blank-image.blank-image img { height: 330px }
+
+/* react-pdf custom style */
+.react-pdf__Document.pdf-reader {
+    height: 543px;
+}
+/* close */
+
 input { font-size: 16px }

@@ -42,7 +42,7 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
                     <>
                         <li>
                             <img src={iconEmail} alt="your email here" />
-                            <Input name="email" value={form.email} onChange={handleChange} placeholder="Email.." />
+                            <Typography variant="subtitle1">{email}</Typography>
                         </li>
                         <li>
                             <img src={iconGender} alt="your gender here" />
@@ -85,7 +85,7 @@ const BoxProfile = ({ editable, form, preview, setForm, setPreview }) => {
                 <Gap height={14} />
                 {
                     editable ?
-                    <Button variant="contained" fullWidth sx={muiRedButton} className="button-input-file"> 
+                    <Button variant="contained" fullWidth className="button-input-file"> 
                         <input className="input-file__profile" name="avatar" type="file" style={{width: '280px'}} id="inputFileProfile" onChange={handleChange}  />
                         Choose photo
                     </Button>

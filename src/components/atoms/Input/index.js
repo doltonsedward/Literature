@@ -31,14 +31,12 @@ const InputBasic = ({...rest}) => {
 const InputField = ({...rest}) => {
     return (
         <label className="wrapper-input default">
-            <textarea {...rest} />
+            <textarea style={{ height: 80 }} {...rest} />
         </label>
     )
 }
 
 const Input = ({label, variant, onClick, ...rest}) => {
-    let classForLabel = 'input-section'
-
     switch (variant) {
 
         case 'file':

@@ -1,5 +1,3 @@
-import { checkUser } from "./config"
-
 const initialValue = {
     isLoading: true,
     isLogin: false,

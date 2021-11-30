@@ -1,11 +1,10 @@
 import './SearchResult.scss'
 
 import { iconSearch, pdfStyle } from "../../../assets"
-import { Gap, Input, Header } from '../..'
-import { pushNotif } from '../../../utils'
+import { Gap, Input, Header, LoadingPDF } from '../..'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-
+import { toast } from 'react-toastify'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 
 // import API
@@ -16,8 +15,6 @@ import { Button, Typography } from '@mui/material'
 
 const SearchResult = ({ searchKey }) => {
     const [dataLiterature, setDataLiterature] = useState([])
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
     const [inputData, setInputData] = useState({
         title: !searchKey ? '' : searchKey.title,
         public_year: ""
@@ -29,12 +26,8 @@ const SearchResult = ({ searchKey }) => {
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
-            const status = error.response?.data.status
-            const message = error.response?.data.message
-            pushNotif({
-                title: status,
-                message
-            })
+            const message = error.response?.data?.message || 'Unknow error'
+            toast.error(message)
         }
     }
 
@@ -45,12 +38,7 @@ const SearchResult = ({ searchKey }) => {
         })
     }
 
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-    }
-
     const handleSubmit = () => {
-        localStorage.setItem("search", JSON.stringify(inputData))
         getLiterature()
     }
 
@@ -99,9 +87,8 @@ const SearchResult = ({ searchKey }) => {
                                         <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
                                             <Document
                                                 file={item.attache}
-                                                onLoadSuccess={onDocumentLoadSuccess}
                                                 className={pdfStyle.pdfreader}
-                                                loading="Wait.."
+                                                loading={<LoadingPDF />}
                                             >
                                                 <Page 
                                                     pageNumber={1} 

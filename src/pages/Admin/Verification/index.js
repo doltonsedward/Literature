@@ -1,7 +1,8 @@
 import './Verification.scss'
 
 import { Gap, Header } from "../../../components"
-import { muiButtonApprove, muiButtonCancel, pushNotif } from '../../../utils';
+import { muiButtonApprove, muiButtonCancel } from '../../../utils'
+import { toast } from 'react-toastify'
 
 // import API
 import { API } from '../../../config';
@@ -29,13 +30,11 @@ const Verification = () => {
 
     const getAllData = async () => {
         try {
-            const response = await API.get('/literatures')
+            const response = await API.get('/literatures/admin')
             setLiteratures(response.data.literatures)
         } catch (error) {
-            pushNotif({
-                title: 'Error',
-                message: 'Unknow error'
-            })
+            const message = error.response.data.message || 'Unknow error'
+            toast.error(message)
         }
     }
 
@@ -50,19 +49,13 @@ const Verification = () => {
             const body = { status: actionName }
 
             const response = await API.patch('/literature/' + literatureId, body, config)
-            pushNotif({
-                title: response?.data?.status,
-                message: response?.data?.message
-            })
+            const { message } = response.data || 'Success change data'
+            toast.success(message)
 
             getAllData()
         } catch (error) {
-            const status = error?.response?.data.status
             const { message } = error?.response?.data
-            pushNotif({
-                title: status,
-                message
-            })
+            toast.error(message)
         }
     } 
 
@@ -71,13 +64,13 @@ const Verification = () => {
     const [rowsPerPage, setRowsPerPage] = React.useState(5)
     
     const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+        setPage(newPage)
+    }
 
     const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+        setRowsPerPage(parseInt(event.target.value, 10))
+        setPage(0)
+    }
 
     React.useEffect(() => {
         getAllData()
@@ -110,7 +103,9 @@ const Verification = () => {
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                        {literatures.map((item, i) => {
+                        {literatures
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map((item, i) => {
                             let statusStyle = ''
                             switch (item.status) {
                                 case 'Waiting to be verified':
@@ -132,6 +127,7 @@ const Verification = () => {
                             
                             return (
                                 <TableRow
+                                    hover
                                     key={i}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
