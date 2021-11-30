@@ -1,6 +1,6 @@
 import './MyCollection.scss'
 import { imgBlank, pdfStyle } from '../../assets'
-import { Gap, Header } from '../../components'
+import { BlankImage, Gap, Header, LoadingPDF } from '../../components'
 import { pushNotif } from "../../utils"
 import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
@@ -10,7 +10,10 @@ import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 import { API } from "../../config"
 
 // MUI component
-import { Typography, Button } from "@mui/material"
+import { 
+    Typography, 
+    Button
+} from "@mui/material"
 
 const MyCollection = () => {
     const [isAction, setIsAction] = useState(false)
@@ -68,7 +71,6 @@ const MyCollection = () => {
                     }
                 </div>
                 <Gap height={41} />
-
                 {
                     collection.length ? 
                     <ul className="list-collection">
@@ -79,7 +81,7 @@ const MyCollection = () => {
                                         <Document
                                             file={item.literature.attache}
                                             className={pdfStyle.pdfreader}
-                                            loading="Loading.."
+                                            loading={<LoadingPDF />}
                                         >
                                             <Page 
                                                 pageNumber={1} 
@@ -100,10 +102,7 @@ const MyCollection = () => {
                         })}
                     </ul>
                     :
-                    <div className="blank-image">
-                        <img src={imgBlank} alt="your literature is empty, get a rest" />
-                        <Typography variant="subtitle1" component="p" className="cover-empty-image">Your literature is empty right now</Typography>
-                    </div>
+                    <BlankImage />
                 }
             </div>
         </>
