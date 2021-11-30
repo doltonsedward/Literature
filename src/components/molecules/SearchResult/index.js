@@ -1,7 +1,7 @@
 import './SearchResult.scss'
 
 import { iconSearch, pdfStyle } from "../../../assets"
-import { Gap, Input, Header } from '../..'
+import { Gap, Input, Header, LoadingPDF } from '../..'
 import { pushNotif } from '../../../utils'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -93,7 +93,7 @@ const SearchResult = ({ searchKey }) => {
                                             <Document
                                                 file={item.attache}
                                                 className={pdfStyle.pdfreader}
-                                                loading="Wait.."
+                                                loading={<LoadingPDF />}
                                             >
                                                 <Page 
                                                     pageNumber={1} 
