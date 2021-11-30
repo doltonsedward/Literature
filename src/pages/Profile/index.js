@@ -1,15 +1,14 @@
 import './_Profile.scss'
-import { BoxProfle, Gap, Header, ProfileFAQ } from '../../components'
+import { BoxProfle, Gap, Header, ProfileFAQ, TabsProfile } from '../../components'
 import { API } from '../../config'
 import { muiWhiteButton, pushNotif, saveProfile } from '../../utils'
-import { imgBlank, pdfStyle } from '../../assets'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 
 // MUI component
 import React, { useEffect } from 'react'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
+
 import { 
     Button, 
     Typography
@@ -58,9 +57,7 @@ const Profile = () => {
     }
 
     // styling
-    const newMuiRedButton = {
-        marginRight: '10px'
-    }
+    const newMuiRedButton = { marginRight: '10px' }
     
     return (
         <>
@@ -79,40 +76,11 @@ const Profile = () => {
 
                 <Typography variant="h1" component="h1" className="heading">My Literature</Typography>
                 <Gap height={41} />
-                {
-                    ownerLiterature.length ?
-                    <ul className="list-owner-literature">
-                        {ownerLiterature?.map((item, i) => {
-                            return (
-                                <li key={i}>
-                                    <Document
-                                        file={item.attache}
-                                        className={pdfStyle.pdfreader}
-                                        loading="Loading.."
-                                    >
-                                        <Page 
-                                            pageNumber={1} 
-                                            renderTextLayer={false}
-                                        />
-                                    </Document>
-                                    <Typography variant="h2" component="h2" className="title">{item.title}</Typography>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <Typography variant="subtitle1" component="p" className="body">{item.author}</Typography>
-                                        <Typography variant="subtitle1" component="p" className="body">{item.publication_date}</Typography>
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    :
-                    <div className="blank-image">
-                        <img src={imgBlank} alt="your literature is empty, get a rest" />
-                        <Typography variant="subtitle1" component="p" className="cover-empty-image">Your literature is empty right now</Typography>
-                    </div>
-                }
+                
+                <TabsProfile data={ownerLiterature} />
 
                 <ProfileFAQ openModal={openModal} handleClose={handler.handleClose} />
-                <Gap height={75} />
+                <Gap height={20} />
             </div>
         </>
     )
