@@ -1,7 +1,6 @@
 import './MyCollection.scss'
-import { imgBlank, pdfStyle } from '../../assets'
+import { pdfStyle } from '../../assets'
 import { BlankImage, Gap, Header, LoadingPDF } from '../../components'
-import { pushNotif } from "../../utils"
 import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'

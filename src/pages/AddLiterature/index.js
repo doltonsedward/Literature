@@ -1,7 +1,7 @@
 import './AddLiterature.scss'
 import { Input, Gap, Header } from '../../components'
 import { pdfStyle } from '../../assets'
-import { pushNotif, handleAnyChange } from '../../utils'
+import { handleAnyChange } from '../../utils'
 import { API } from '../../config'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'

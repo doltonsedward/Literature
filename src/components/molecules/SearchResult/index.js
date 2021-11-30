@@ -2,7 +2,6 @@ import './SearchResult.scss'
 
 import { iconSearch, pdfStyle } from "../../../assets"
 import { Gap, Input, Header, LoadingPDF } from '../..'
-import { pushNotif } from '../../../utils'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
