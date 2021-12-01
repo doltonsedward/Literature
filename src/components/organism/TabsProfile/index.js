@@ -42,30 +42,23 @@ const TabsProfile = ({ data }) => {
             <TabPanel value={value} index={0}>
                 {
                     data.length && filterWaiting.length ? 
-                    filterWaiting.map(item => {
-                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
-                                    <ListOwnerLiterature data={filterWaiting}  /> 
-                                </Link>  
-                    })
+                    <Link>
+                        <ListOwnerLiterature data={filterWaiting} /> 
+                    </Link>
                     : <BlankImage />
                 }
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {
                     data.length && filterApproval.length ?
-                    filterApproval.map(item => {
-                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
-                                    <ListOwnerLiterature data={filterApproval}  /> 
-                                </Link>  
-                    })
-                    : <BlankImage />
+                    <ListOwnerLiterature data={filterApproval} /> : <BlankImage />
                 }
             </TabPanel>
             <TabPanel value={value} index={2}>
                 {
                     data.length && filterCancel.length ?
                     filterCancel.map(item => {
-                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
+                        return <Link to={`/literature/${filterCancel.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
                                     <ListOwnerLiterature data={filterCancel}  /> 
                                 </Link>  
                     })
