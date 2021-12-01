@@ -20,9 +20,14 @@ const SearchResult = ({ searchKey }) => {
         public_year: ""
     })
 
-    const getLiterature = async () => {
+    const getLiterature = async (type) => {
         try {
-            const response = await API.get(`/search-literatures?${inputData.title ? `title=${inputData.title}&` : ''}${inputData.public_year ? `public_year=${inputData.public_year}` : ''}`)
+            let response 
+            if (type === 'all') {
+                response = await API.get('/literatures')
+            } else {
+                response = await API.get(`/search-literatures?${inputData.title ? `title=${inputData.title}&` : ''}${inputData.public_year ? `public_year=${inputData.public_year}` : ''}`)
+            }
 
             setDataLiterature(response.data.literatures)
         } catch (error) {
@@ -66,6 +71,7 @@ const SearchResult = ({ searchKey }) => {
                     <div className="year-option">
                         <Typography variant="subtitle1" style={{ color: 'var(--secondary)', textAlign: 'center' }}>Anytime</Typography>
                         <select name="public_year" id="publicYear" onChange={handleChange}>
+                            <option value="all">All</option>
                             <option value="2011">Since 2011</option>
                             <option value="2012">Since 2012</option>
                             <option value="2013">Since 2013</option>
@@ -81,33 +87,40 @@ const SearchResult = ({ searchKey }) => {
                     </div>
                     <div className="literatures">
                         <ul>
-                            {dataLiterature.map((item, i) => {
-                                return (
-                                    <li key={i}>
-                                        <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
-                                            <Document
-                                                file={item.attache}
-                                                className={pdfStyle.pdfreader}
-                                                loading={<LoadingPDF />}
-                                            >
-                                                <Page 
-                                                    pageNumber={1} 
-                                                    renderTextLayer={false}
-                                                />
-                                            </Document>
-                                            
-                                            {/* <embed src={`${item.attache}#toolbar=0&navpanes=0&scrollbar=0"`} type="application/pdf" /> */}
-                                            <Gap height={18} />
-                                            <p className="title-literature">{item.title}</p>
-                                            <Gap height={15} />
-                                            <div className="footer">
-                                                <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.author}</Typography>
-                                                <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.publication_date.split('-')[2]}</Typography>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                )
-                            })}
+                            {
+                                dataLiterature.length ? 
+                                dataLiterature.map((item, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
+                                                <Document
+                                                    file={item.attache}
+                                                    className={pdfStyle.pdfreader}
+                                                    loading={<LoadingPDF />}
+                                                >
+                                                    <Page 
+                                                        pageNumber={1} 
+                                                        renderTextLayer={false}
+                                                    />
+                                                </Document>
+                                                
+                                                <Gap height={18} />
+                                                <p className="title-literature">{item.title}</p>
+                                                <Gap height={15} />
+                                                <div className="footer">
+                                                    <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.author}</Typography>
+                                                    <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>{item.publication_date.split('-')[2]}</Typography>
+                                                </div>
+                                            </Link>
+                                        </li>
+                                    )
+                                })
+                                :
+                                <Typography variant="subtitle1" style={{ color: 'var(--subtitle)' }}>
+                                    we can't find what you're looking for, 
+                                    <span onClick={()=> getLiterature('all')} style={{ color: 'lightblue', cursor: 'pointer' }}> click here to see all</span>
+                                </Typography>
+                            }
                         </ul>
                         
                     </div>

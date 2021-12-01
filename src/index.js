@@ -1,16 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'react-toastify/dist/ReactToastify.css';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import 'react-toastify/dist/ReactToastify.css'
+import './index.css'
 import './assets/css/root.css'
-import { ToastContainer } from 'react-toastify';
-import App from './pages/App';
+import { ToastContainer } from 'react-toastify'
+import App from './pages/App'
 import store from './store'
-import { Provider } from "react-redux";
-import { Notifications } from 'react-push-notification'
+import { Provider } from "react-redux"
 
 // import MUI component
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const theme = createTheme({
   palette: {
@@ -46,7 +45,6 @@ ReactDOM.render(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <ToastContainer position="top-right" />
-        <Notifications position="top-right" />
         <App />
       </ThemeProvider>
     </Provider>

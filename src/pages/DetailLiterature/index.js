@@ -2,9 +2,9 @@ import './DetailLiterature.scss'
 import { API } from '../../config/API'
 import { downloadPDF } from '../../utils'
 import { iconCollection, iconDownload } from '../../assets'
-import { Header } from '../../components'
+import { Gap, Header } from '../../components'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { toast } from 'react-toastify'
 
 // PDF render
@@ -14,16 +14,32 @@ import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useTheme } from '@mui/material/styles';
 import { 
-    Button, 
-    Typography 
+    Input,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    useMediaQuery,
+    Typography,
+    Button
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 
 const DetailLiterature = () => {
+    const history = useHistory()
     const currentState = useSelector(state => state)
     const { literature_id } = useParams()
 
+    // MUI state and logic
+    const [openDialog, setOpenDialog] = useState(false)
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    // close
+
+    const [inputMakeSure, setInputMakeSure] = useState('')
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
     const [collection, setCollection] = useState({})
@@ -70,6 +86,29 @@ const DetailLiterature = () => {
         }
     }
 
+    const handleDeleteLiterature = async () => {
+        try {
+            const response = await API.delete('/literature/' + literature_id)
+
+            if (response.status === 'success') return toast.success(`${literature.title} delete finished`)
+            history.push('/profile')
+        } catch (error) {
+            toast.error("Unknow error")
+        }
+    }
+
+    const handleCheckInput = (e) => {
+        setInputMakeSure(e.target.value)
+    }
+
+    const handler = {
+        handleDisAgree: ()=> setOpenDialog(false),
+        handleAgree: ()=> {
+            handleDeleteLiterature()
+            setOpenDialog(false)
+        }
+    }
+
     // PDF render session
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
@@ -107,6 +146,27 @@ const DetailLiterature = () => {
             opacity: '.7'
         }
     }
+
+    const buttonDelete = {
+        color: 'var(--warning)',
+        border: '1px solid var(--warning)',
+        '&:hover': {
+            border: '1px solid var(--warning)',
+            opacity: '.7'
+        }
+    }
+
+    const confirmButton = {
+        color: '#1e74c9',
+        '&:hover': {
+           backgroundColor: 'rgba(46, 190, 209, .15)' 
+        }
+    }
+
+    const author = currentState.user.fullName
+
+    console.log(author == inputMakeSure)
+    console.log(inputMakeSure)
     
     return (
         <>
@@ -184,12 +244,51 @@ const DetailLiterature = () => {
                             
                         </Button>
                         : 
+                        literature.status === 'Cancel' ?
+                        <Button variant="outlined" sx={buttonDelete} onClick={()=> setOpenDialog(true)}>
+                            <p>delete literature</p>
+                        </Button>
+                        :
                         <Button variant="outlined" sx={buttonAuthor}>
                             <p>you are the author</p>
                         </Button>
                     }
                 </div>
             </div>
+            <Dialog
+                fullScreen={fullScreen}
+                open={openDialog}
+                onClose={() => setOpenDialog(false)}
+                aria-labelledby="responsive-dialog-title"
+            >
+                <DialogTitle id="responsive-dialog-title">
+                    {"Delete literature ?"}
+                </DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    <p>When you delete this literature, nothing will be returned. deletion will be permanent. Do it wisely</p>
+                    <Gap height={5} />
+                    <p>Type this <b>{author}</b></p>
+                    <Gap height={10} />
+                    <Input fullWidth color="success" onChange={handleCheckInput} aria-label="description" />
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button autoFocus sx={confirmButton} onClick={handler.handleDisAgree}>
+                    Cancel
+                </Button>
+                {
+                    author == inputMakeSure ?
+                    <Button sx={confirmButton} onClick={handler.handleAgree} autoFocus>
+                        Delete literature
+                    </Button>
+                    :
+                    <Button sx={confirmButton} onClick={()=> toast.error('Wrong input')} autoFocus>
+                        Delete literature
+                    </Button>
+                }
+                </DialogActions>
+            </Dialog>
         </>
     )
 }

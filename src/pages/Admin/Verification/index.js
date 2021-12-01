@@ -10,6 +10,7 @@ import { API } from '../../../config';
 // MUI component
 import * as React from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { 
     Button,
     Table,
@@ -150,6 +151,9 @@ const Verification = () => {
                                         {
                                             item.status === 'Approve' ?
                                             <CheckCircleIcon sx={{ color: '#0ACF83' }} />
+                                            : 
+                                            item.status === 'Cancel' ?
+                                            <HighlightOffIcon sx={{ color: 'var(--text-color-warning)' }} />
                                             :
                                             <>
                                                 <Button variant="contained" sx={muiButtonCancel} onClick={()=> handleAction('Cancel', item.id)}>cancel</Button>
