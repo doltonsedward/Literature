@@ -38,7 +38,7 @@ const Profile = () => {
             
             setOwnerLiterature(response?.data.literatures)
         } catch (error) {
-            const message = error.response.data.message || 'Unknow error'
+            const message = error?.response?.data.message || 'Unknow error'
             toast.error(message)
         }
     }

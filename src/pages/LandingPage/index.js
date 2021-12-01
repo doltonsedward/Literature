@@ -33,9 +33,9 @@ const LandingPage = () => {
             <img src={logo} alt="" />
             <div className="main">
                     <div className="section-one">
-                        <Typography variant="h1" component="div" sx={{ width: 614, fontFamily: 'Times New Roman' }}>source of intelligence</Typography>
+                        <Typography variant="h1" component="h1" sx={{ width: 614, fontStyle: 'italic' }}>source of intelligence</Typography>
                         <Gap height={44} />
-                        <Typography variant="subtitle1" component="div" sx={{ width: 408, height: 107 }}>Sign-up and receive unlimited accesss to all of your literatur - share your literature.</Typography>
+                        <Typography variant="subtitle1" component="p" sx={{ width: 408, height: 107 }}>Sign-up and receive unlimited accesss to all of your literatur - share your literature.</Typography>
                         <div className="wrapper-button">
                             <Button variant="contained" sx={signUpButton} onClick={()=> setIsRegisterOpen(true)}>Sign up</Button>
                             <Button variant="contained" sx={signInButton} onClick={()=> setIsLoginOpen(true)}>Sign in</Button>

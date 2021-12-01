@@ -22,8 +22,10 @@
     --third-effect: var(--low-white);
     --success: var(--green);
     --waiting: var(--yellow);
+    --warning: var(--low-red);
     
     --text-color-primary: var(--white);
+    --text-color-warning: var(--low-red);
 
     /* background section */
     --bg-admin: var(--smooth-white);

@@ -7,6 +7,7 @@ import {
     Tabs,
     Tab
 } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 const TabsProfile = ({ data }) => {
     const [value, setValue] = useState(0)
@@ -26,6 +27,8 @@ const TabsProfile = ({ data }) => {
     const handleMuiChange = (event, newValue) => {
         setValue(newValue)
     }
+
+    console.log(filterCancel)
     
     return (
         <Box className="tabs-profile">
@@ -39,19 +42,34 @@ const TabsProfile = ({ data }) => {
             <TabPanel value={value} index={0}>
                 {
                     data.length && filterWaiting.length ? 
-                    <ListOwnerLiterature data={filterWaiting} /> : <BlankImage />
+                    filterWaiting.map(item => {
+                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
+                                    <ListOwnerLiterature data={filterWaiting}  /> 
+                                </Link>  
+                    })
+                    : <BlankImage />
                 }
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {
                     data.length && filterApproval.length ?
-                    <ListOwnerLiterature data={filterApproval} /> : <BlankImage />
+                    filterApproval.map(item => {
+                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
+                                    <ListOwnerLiterature data={filterApproval}  /> 
+                                </Link>  
+                    })
+                    : <BlankImage />
                 }
             </TabPanel>
             <TabPanel value={value} index={2}>
                 {
                     data.length && filterCancel.length ?
-                    <ListOwnerLiterature data={filterCancel} /> : <BlankImage />
+                    filterCancel.map(item => {
+                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
+                                    <ListOwnerLiterature data={filterCancel}  /> 
+                                </Link>  
+                    })
+                    : <BlankImage />
                 }
             </TabPanel>
         </Box>
