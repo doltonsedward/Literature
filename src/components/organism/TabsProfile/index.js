@@ -58,7 +58,7 @@ const TabsProfile = ({ data }) => {
                 {
                     data.length && filterCancel.length ?
                     filterCancel.map(item => {
-                        return <Link to={`/literature/${filterCancel.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
+                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
                                     <ListOwnerLiterature data={filterCancel}  /> 
                                 </Link>  
                     })

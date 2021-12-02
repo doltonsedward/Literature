@@ -1,5 +1,5 @@
 import './AddLiterature.scss'
-import { Input, Gap, Header } from '../../components'
+import { Input, Gap, Header, DialogAddLiterature } from '../../components'
 import { pdfStyle } from '../../assets'
 import { handleAnyChange } from '../../utils'
 import { API } from '../../config'
@@ -11,11 +11,6 @@ import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 // MUI component
 import { useTheme } from '@mui/material/styles';
 import { 
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
     useMediaQuery,
     Button,
     Typography,
@@ -65,7 +60,7 @@ const AddLiterature = () => {
 
             toast.success(response.data.message || 'Add literature finished')
         } catch (error) {
-            const message = error.response.data.message || error.response.data.error.message
+            const message = error.response?.data.message || error.response?.data.error.message
 
             toast.error(message ? message : 'Unknow error')
         }
@@ -92,13 +87,6 @@ const AddLiterature = () => {
 
     const submitButton = {
         float: 'right'
-    }
-
-    const confirmButton = {
-        color: '#1e74c9',
-        '&:hover': {
-           backgroundColor: 'rgba(46, 190, 209, .15)' 
-        }
     }
     
     return (
@@ -144,29 +132,13 @@ const AddLiterature = () => {
                 </ul>
                 <Gap height={55} />
                 <Button variant="contained" sx={submitButton} onClick={handler.handleSubmit}>add literature</Button>
-                <Dialog
-                    fullScreen={fullScreen}
-                    open={openDialog}
-                    onClose={() => setOpenDialog(false)}
-                    aria-labelledby="responsive-dialog-title"
-                >
-                    <DialogTitle id="responsive-dialog-title">
-                        {"Add literature ?"}
-                    </DialogTitle>
-                    <DialogContent>
-                    <DialogContentText>
-                        You can check again and postpone by pressing the cancel button to add literature if you are not sure
-                    </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                    <Button autoFocus sx={confirmButton} onClick={handler.handleDisAgree}>
-                        Cancel
-                    </Button>
-                    <Button sx={confirmButton} onClick={handler.handleAgree} autoFocus>
-                        Add literature
-                    </Button>
-                    </DialogActions>
-                </Dialog>
+                <DialogAddLiterature 
+                    fullScreen={fullScreen} 
+                    open={openDialog} 
+                    setOpen={setOpenDialog} 
+                    onAgree={handler.handleAgree} 
+                    onDisagree={handler.handleDisAgree}
+                />
                 <Gap height={77} />
             </div>
         </>
