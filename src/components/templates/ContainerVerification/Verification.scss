@@ -1,0 +1,9 @@
+.admin {
+    min-height: calc(100vh - 100px);
+    color: var(--primary);
+    background-color: var(--bg-admin);
+
+    .title {
+        margin-top: 59px;
+    }
+}
