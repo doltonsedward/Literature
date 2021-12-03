@@ -19,7 +19,7 @@ const ListDetailLiterature = ({ data, onDownload, numPages }) => {
             </li>
             <li>
                 <Typography variant="subtitle1" component="h2" className="body isbn">ISBN</Typography>
-                <Typography variant="subtitle2" component="p">{data?.pages}</Typography>
+                <Typography variant="subtitle2" component="p">{data?.ISBN}</Typography>
             </li>
             <li>
                 <Button variant="contained" onClick={onDownload}>download <img src={iconDownload} alt="download your literature here" /></Button>

@@ -10,3 +10,4 @@ export { Header, BlankImage, ListOwnerLiterature, Login, Register, ProfileFAQ, T
 export * from './Box'
 export * from './Dialog'
 export * from './List'
+export * from './TableBody'

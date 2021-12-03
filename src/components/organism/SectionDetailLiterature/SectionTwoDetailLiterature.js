@@ -3,15 +3,15 @@ import { iconCollection } from '../../../assets'
 // MUI component
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove'
 
-const SectionTwoDetailLiterature = ({ getter, setter, otherData, UIComponent, handler }) => {
+const SectionTwoDetailLiterature = ({ getter, setter, otherData, UIComponent, handler, containerClassName }) => {
     const { currentState } = otherData
     const { literature, collection } = getter
-    const { Button, Typography } = UIComponent
+    const { Button } = UIComponent
     const { setOpenDialog } = setter
     const { handleCollection } = handler
 
     return (
-        <div className="section-two">
+        <div className={containerClassName}>
             {
                 literature.ownerLiterature?.fullName !== currentState.user.fullName ?
                 <Button variant="contained" onClick={handleCollection}>

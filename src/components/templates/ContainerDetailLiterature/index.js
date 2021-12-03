@@ -10,46 +10,24 @@ const ContainerDetailLiterature = ({ otherData, dataDialog, handler, getter }) =
     const { currentState, author } = otherData
     const { openDialog, setOpenDialog } = dataDialog
     const { previousPage, nextPage, download, onDocumentLoadSuccess, onAgree,  onDisagree, handleCheckInput, handleCollection } = handler
-    
-    const componentToChild = { Button, Typography }
-    const getterToSectionOne = {
-        pageNumber,
-        numPages,
-        literature
-    }
-
-    const handlerToSectionOne = {
-        previousPage,
-        nextPage,
-        onDocumentLoadSuccess,
-        download
-    }
-
-    const getterToSectionTwo = {
-        collection,
-        literature
-    }
-
-    const setterToSectionTwo = { setOpenDialog }
-    const handlerToSectionTwo = { handleCollection }
-    const dataToSectionTwo = { currentState }
 
     return (
         <>
             <Header />
             <div className="detail-literature literature-default-padding">
                 <SectionOneDetailLiterature 
-                    getter={getterToSectionOne}
-                    handler={handlerToSectionOne}
                     containerClassName="section-one"
-                    UIComponent={componentToChild}
+                    handler={{ previousPage, nextPage, onDocumentLoadSuccess, download }}
+                    getter={{ pageNumber, numPages, literature }}
+                    UIComponent={{ Button, Typography }}
                 />
                 <SectionTwoDetailLiterature 
-                    getter={getterToSectionTwo} 
-                    setter={setterToSectionTwo}
-                    otherData={dataToSectionTwo}
-                    UIComponent={componentToChild}
-                    handler={handlerToSectionTwo}
+                    containerClassName="section-two"
+                    handler={{ handleCollection }}
+                    getter={{ collection, literature }} 
+                    setter={{ setOpenDialog }}
+                    otherData={{ currentState }}
+                    UIComponent={{ Button }}
                 />
             </div>
             <DialogDetailLiterature 

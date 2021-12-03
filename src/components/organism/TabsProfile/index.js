@@ -27,8 +27,6 @@ const TabsProfile = ({ data }) => {
     const handleMuiChange = (event, newValue) => {
         setValue(newValue)
     }
-
-    console.log(filterCancel)
     
     return (
         <Box className="tabs-profile">

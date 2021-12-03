@@ -1,5 +1,5 @@
 import { API } from '../../config/API'
-import { downloadPDF } from '../../utils'
+import { downloadPDF, getDetailLiterature, getCollection } from '../../utils'
 import { ContainerDetailLiterature, Header } from '../../components'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
@@ -18,38 +18,16 @@ const DetailLiterature = () => {
     const [collection, setCollection] = useState({})
     const [literature, setLiterature] = useState({})
 
-    const getLiterature = async () => {
-        try {
-            const response = await API.get('/literature/' + literature_id)
-
-            setLiterature(response.data.literature)
-        } catch (error) {
-            const message = error.response.data.message || 'Unknow error'
-            toast.error(message)
-        }
-    }
-
-    const getCollection = async () => {
-        try {
-            const response = await API.get('/collection/' + literature_id)
-
-            setCollection(response.data.literature)
-        } catch (error) {
-            const message = error?.response?.data.message || 'Unknow error'
-            toast.error(message)
-        }
-    }
-
     const handleCollection = async () => {
         try {
             if (collection) {
                 await API.delete('/collection/' + collection.id)
-                getCollection()
+                getCollection(API, setCollection, literature_id, toast)
                 
                 toast.success(`${literature.title} remove from collection`)
             } else {
                 await API.post('/collection/' + literature_id)
-                getCollection()
+                getCollection(API, setCollection, literature_id, toast)
                 
                 toast.success(`${literature.title} add to collection`)
             }
@@ -72,14 +50,15 @@ const DetailLiterature = () => {
         }
     }
 
+    
     const handler = {
         handleCollection,
         handleCheckInput: (e) => setInputMakeSure(e.target.value),
         changePage: (offset) => setPageNumber(prevPageNumber => prevPageNumber + offset), // handle when page pdf change
         previousPage: () => handler.changePage(-1), // handle to prev page pdf
-        nextPage: ()=> handler.changePage(1), // handle to next page pdf
-        onDisagree: ()=> setOpenDialog(false),
-        onAgree: ()=> {
+        nextPage: () => handler.changePage(1), // handle to next page pdf
+        onDisagree: () => setOpenDialog(false),
+        onAgree: () => {
             handleDeleteLiterature()
             setOpenDialog(false)
         },
@@ -95,8 +74,8 @@ const DetailLiterature = () => {
     }
 
     useEffect(() => {
-        getLiterature()
-        getCollection()
+        getDetailLiterature(API, setLiterature, literature_id, toast)
+        getCollection(API, setCollection, literature_id, toast)
     }, [])
 
     const author = currentState.user.fullName
