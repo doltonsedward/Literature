@@ -9,10 +9,15 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    Input
+    Input,
+    useMediaQuery,
+    useTheme
 } from "@mui/material"
 
-const DialogDetailLiterature = ({ author, fullScreen, open, setOpen, onAgree, onDisagree, onCheckInput, inputMakeSure }) => {
+const DialogDetailLiterature = ({ author, open, setOpen, onAgree, onDisagree, onCheckInput, inputMakeSure }) => {
+    const theme = useTheme()
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
+
     const confirmButton = {
         color: '#1e74c9',
         '&:hover': {
