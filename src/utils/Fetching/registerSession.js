@@ -27,8 +27,9 @@ const registerSession = async (data, setOpen, setMessage, setSeverity) => {
             toast.success("Login success, Welcome " + response?.data?.user.fullName)
         } 
     } catch (error) {
-        const messageError = error?.response?.data?.error?.message || error.response.data.message
-        setMessage(messageError)
+        console.log(error)
+        const messageError = error?.response?.data?.error?.message || error?.response?.data.message
+        setMessage(messageError || 'Unknow error')
         setSeverity('error')
     }
 }

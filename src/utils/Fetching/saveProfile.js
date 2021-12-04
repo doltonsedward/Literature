@@ -43,6 +43,7 @@ const saveProfile = async (form, editable, setEditable) => {
         checkUser()
         setEditable(!editable)
     } catch (error) {
+        console.log(error.response)
         toast.error("You must upload photo first")
     }
 }
