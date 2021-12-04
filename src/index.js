@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {} from 'dotenv/config'
 import 'react-toastify/dist/ReactToastify.css'
 import './index.css'
 import './assets/scss/shortcut.scss'

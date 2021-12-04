@@ -12,7 +12,8 @@ if (localStorage.token) {
 }
 
 function App() {
-  console.clear()
+  // console.clear()
+  console.log(process.env.REACT_APP_BASE_API_URL)
   useEffect(()=> {
       checkUser()
   }, [])
