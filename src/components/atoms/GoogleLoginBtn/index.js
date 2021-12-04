@@ -59,7 +59,7 @@ const GoogleLoginBtn = ({ setMessage, setSeverity }) => {
     
     return (
         <div>
-            {/* use disabled={renderProps.disabled} for disable the button*/}
+            {/* use disabled={renderProps.disabled} for disable the button */}
             <GoogleLogin 
                 clientId="1076583809766-f70m00reofepf768mcmue39qrm7gbch6.apps.googleusercontent.com"
                 render={renderProps => (

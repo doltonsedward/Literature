@@ -27,8 +27,6 @@ const TabsProfile = ({ data }) => {
     const handleMuiChange = (event, newValue) => {
         setValue(newValue)
     }
-
-    console.log(filterCancel)
     
     return (
         <Box className="tabs-profile">
@@ -42,23 +40,16 @@ const TabsProfile = ({ data }) => {
             <TabPanel value={value} index={0}>
                 {
                     data.length && filterWaiting.length ? 
-                    filterWaiting.map(item => {
-                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
-                                    <ListOwnerLiterature data={filterWaiting}  /> 
-                                </Link>  
-                    })
+                    <Link>
+                        <ListOwnerLiterature data={filterWaiting} /> 
+                    </Link>
                     : <BlankImage />
                 }
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {
                     data.length && filterApproval.length ?
-                    filterApproval.map(item => {
-                        return <Link to={`/literature/${item.id}`} style={{ color: 'var(--text-color-primary)', textDecoration: 'none' }}>
-                                    <ListOwnerLiterature data={filterApproval}  /> 
-                                </Link>  
-                    })
-                    : <BlankImage />
+                    <ListOwnerLiterature data={filterApproval} /> : <BlankImage />
                 }
             </TabPanel>
             <TabPanel value={value} index={2}>

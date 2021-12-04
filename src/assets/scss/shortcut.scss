@@ -1,0 +1,23 @@
+.button-delete {
+    color: var(--warning);
+    border: 1px solid var(--warning);
+
+    &:hover {
+        border: 1px solid var(--warning);
+        opacity: .7;
+    }
+}
+
+.button-author {
+    color: lightblue;
+    border: 1px solid lightblue;
+
+    &:hover {
+        border: 1px solid lightblue;
+        opacity: .7;
+    }
+}
+
+.status {
+    .warning { color: 'yellow' }
+}

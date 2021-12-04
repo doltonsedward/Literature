@@ -33,6 +33,11 @@ const Login = ({ isOpen, setIsOpen }) => {
                 ...form,
                 [e.target.name]: e.target.value
             })
+        },
+        handleEnterPressed: (e) => {
+            if (e.keyCode === 13) {
+                this.handleLogin()
+            }
         }
     }
     
@@ -60,6 +65,7 @@ const Login = ({ isOpen, setIsOpen }) => {
                             <Gap height={36} />
                             <LoadingButton
                                 onClick={handler.handleLogin}
+                                onKeyDown={handler.handleEnterPressed}
                                 loading={loading}
                                 sx={loginStyle.submitBtn}
                                 variant="contained"
