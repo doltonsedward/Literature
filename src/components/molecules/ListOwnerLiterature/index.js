@@ -4,6 +4,7 @@ import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 import { Typography } from '@mui/material'
 
 const ListOwnerLiterature = ({ data }) => {
+    console.log(data)
     return (
         <ul className="list-owner-literature">
             {data?.map((item, i) => {
