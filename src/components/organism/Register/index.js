@@ -66,8 +66,8 @@ const Register = ({ isOpen, setIsOpen }) => {
                             <Input name="address" value={form.address} onChange={handler.onInputChange} variant="field" placeholder="Address" />
                             <Gap height={36} />
                             <Button variant="contained" sx={registerStyle.submitBtn} onClick={handler.handleRegister}>Sign up</Button>
-                            <Typography variant="subtitle1" component="p" style={registerStyle.textStyles}>or</Typography>
-                            <GoogleLoginBtn setMessage={setMessage} setSeverity={setSeverity} />
+                            {/* <Typography variant="subtitle1" component="p" style={registerStyle.textStyles}>or</Typography>
+                            <GoogleLoginBtn setMessage={setMessage} setSeverity={setSeverity} /> */}
                         </Box>
                     </Box>
                 </Fade>
