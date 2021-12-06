@@ -36,8 +36,8 @@ const loginSession = async (data, setOpen, setMessage, setSeverity, setLoading) 
         setTimeout(()=> {
             setLoading(false)
 
-            const message = error?.response?.data.message || error?.response?.data?.error.message
-            setMessage(message)
+            const message = error?.response?.data?.message || error?.response?.data?.error?.message
+            setMessage(message || 'Unknow error')
             setSeverity('error')
         }, 1000)
 

@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react';
 // import API
 import { API } from '../../../config';
 
-
 const Verification = () => {
     const [literatures, setLiteratures] = useState([])
     // MUI logic

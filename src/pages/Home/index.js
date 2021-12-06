@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 // import API
-import { API, checkUser, setAuthToken } from '../../config'
+import { API } from '../../config'
 
 // MUI component
 import { Button } from '@mui/material'
@@ -26,7 +26,7 @@ const Home = () => {
             if (type === 'search') {
                 response = await API.get(`/search-literatures?${inputData.title ? `title=${inputData.title}&` : ''}${inputData.public_year ? `public_year=${inputData.public_year}` : ''}`)
             } else {
-                response = await API.get('/literatures')
+                response = await API.get('/literatures') 
             }
             
             setDataLiterature(response.data.literatures)
@@ -50,18 +50,10 @@ const Home = () => {
         handleSearch: () => {
             getLiterature('search')
         }
-    }
-
-    // for fetching setauth again
-    useEffect(()=> {
-        if (localStorage.token) {
-            setAuthToken(localStorage.token)
-        }
-    }, [])
+    } 
 
     useEffect(()=> {
         getLiterature()
-        checkUser()
     }, [])
 
     const fetchingHandler = { getLiterature }
