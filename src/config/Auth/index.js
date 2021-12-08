@@ -20,12 +20,9 @@ const checkUser = async () => {
             payload,
           });
     } catch (error) {
-        const times = Math.floor(Math.random() * 4000 + 100)
-        setTimeout(() => {
-            store.dispatch({
-                type: "AUTH_ERROR",
-            })
-        }, times);
+        store.dispatch({
+            type: "STOP_LOADING",
+        })
     }
 }
 
