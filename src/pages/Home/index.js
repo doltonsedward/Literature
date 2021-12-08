@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 // import API
-import { API } from '../../config'
+import { API, checkUser, setAuthToken } from '../../config'
 
 // MUI component
 import { Button } from '@mui/material'
@@ -53,6 +53,11 @@ const Home = () => {
     } 
 
     useEffect(()=> {
+        if (localStorage.token) {
+            setAuthToken(localStorage.token)
+        }
+
+        checkUser()
         getLiterature()
     }, [])
 

@@ -1,6 +1,6 @@
 import './_Login.scss'
-import { Gap, GoogleLoginBtn, Input, MuiAlert } from '../..';
-import { loginStyle, loginSession } from '../../../utils';
+import { Gap, GoogleLoginBtn, Input, MuiAlert } from '../..' // import your googleLoginBtn here
+import { loginStyle, loginSession } from '../../../utils'
 
 // MUI component
 import * as React from 'react';
@@ -72,9 +72,8 @@ const Login = ({ isOpen, setIsOpen }) => {
                             >
                                 sign in
                             </LoadingButton>
+                            {/* your component here */}
                             <GoogleLoginBtn />
-                            {/* <Typography variant="subtitle1" component="p" sx={loginStyle.textStyles}>or</Typography> */}
-                            {/* <GoogleLoginBtn setMessage={setMessage} setSeverity={setSeverity} /> */}
                         </Box>
                     </Box>
                 </Fade>
