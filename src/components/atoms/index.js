@@ -1,5 +1,5 @@
 import Gap from './Gap'
-import GoogleLoginBtn from './GoogleLoginBtn'
+import GoogleLoginBtn from './GoogleLoginBtn/GoogleLoginBtn'
 import Input from './Input'
 import MuiAlert from './MuiAlert'
 
