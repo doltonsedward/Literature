@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Gap, Input, GoogleLoginBtn, MuiAlert } from '../..'
+import { registerStyle, handleChange, registerSession } from '../../../utils'
 
 // MUI component
 import { 
@@ -10,8 +12,6 @@ import {
     Button,
 } from '@mui/material';
 
-import { Gap, Input, GoogleLoginBtn, MuiAlert } from '../..'
-import { registerStyle, handleChange, registerSession } from '../../../utils'
 
 const Register = ({ isOpen, setIsOpen }) => {
     const [open, setOpen] = React.useState(false)
@@ -66,8 +66,8 @@ const Register = ({ isOpen, setIsOpen }) => {
                             <Input name="address" value={form.address} onChange={handler.onInputChange} variant="field" placeholder="Address" />
                             <Gap height={36} />
                             <Button variant="contained" sx={registerStyle.submitBtn} onClick={handler.handleRegister}>Sign up</Button>
-                            {/* <Typography variant="subtitle1" component="p" style={registerStyle.textStyles}>or</Typography>
-                            <GoogleLoginBtn setMessage={setMessage} setSeverity={setSeverity} /> */}
+                            <Typography variant="subtitle1" component="p" sx={registerStyle.textStyles}>or</Typography>
+                            <GoogleLoginBtn />
                         </Box>
                     </Box>
                 </Fade>

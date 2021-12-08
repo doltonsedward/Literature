@@ -2,7 +2,6 @@ import './_Home.scss'
 import React from 'react';
 import { iconSearch, logo } from "../../assets"
 import { Input, Gap, Header, ContainerSearchResult } from '../../components'
-
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 

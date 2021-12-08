@@ -72,7 +72,7 @@ const Login = ({ isOpen, setIsOpen }) => {
                             >
                                 sign in
                             </LoadingButton>
-                            {/* your component here */}
+                            <Typography variant="subtitle1" component="p" sx={loginStyle.textStyles}>or</Typography>
                             <GoogleLoginBtn />
                         </Box>
                     </Box>
