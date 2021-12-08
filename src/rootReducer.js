@@ -27,6 +27,13 @@ const rootReducer = (state = initialValue, action) => {
                 isLogin: false,
                 user: null
             }
+
+        case 'STOP_LOADING':
+            return {
+                ...state,
+                isLoading: false
+            }
+            
         default:
             return state
     }
